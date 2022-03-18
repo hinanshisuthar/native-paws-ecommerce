@@ -8,20 +8,22 @@ import { v4 as uuid } from "uuid";
 export const categories = [
   {
     _id: uuid(),
-    categoryName: "fiction",
-    description:
-      "literature in the form of prose, especially novels, that describes imaginary events and people",
+    categoryName: "food",
+    categoryImg: "https://res.cloudinary.com/do5ez3xws/image/upload/v1647500586/home/food_uwkbjc.jpg"
   },
   {
     _id: uuid(),
-    categoryName: "non-fiction",
-    description:
-      "Non-fiction is writing that gives information or describes real events, rather than telling a story.",
+    categoryName: "leash",
+    categoryImg: "https://res.cloudinary.com/do5ez3xws/image/upload/v1647500589/home/leash_juk9vv.svg"
   },
   {
     _id: uuid(),
-    categoryName: "horror",
-    description:
-      "Meant to cause discomfort and fear for both the character and readers, horror writers often make use of supernatural and paranormal elements in morbid stories that are sometimes a little too realistic.",
+    categoryName: "toys",
+    categoryImg: 'https://res.cloudinary.com/do5ez3xws/image/upload/v1647500588/home/toys_l4zmsj.svg'
+  },
+  {
+    _id: uuid(),
+    categoryName: "clothes",
+    categoryImg: 'https://res.cloudinary.com/do5ez3xws/image/upload/v1647500590/home/cloth_ttnk0r.svg'
   },
 ];
