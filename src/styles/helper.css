@@ -1,0 +1,56 @@
+:root {
+    --color-dark-blue: #392758;
+    --light-grey: #eeebeb;
+    --dark-grey: #979797;
+    --sand-bg: #ffebce;
+    --bg-color-2: rgb(5, 15, 58);
+    --box-shadow-2: rgba(0, 0, 0, 0.20) 0px 3px 8px;
+    --hover-color-dark: #f13737;
+}
+
+.grid-6-col-auto {
+    display: grid;
+    grid-template-columns:  repeat(6, 1fr);
+    gap: 2rem;
+}
+
+.grid-60-40 {
+    grid-template-columns: 60% 1fr;
+    place-content: center;
+}
+
+.grid-70-30 {
+    grid-template-columns: 70% 1fr;
+    place-content: center;
+}
+
+.thin {
+    -webkit-text-stroke: 1px var(--background-color);
+}
+
+
+/* scroll bar */
+
+::-webkit-scrollbar{
+    height: 2px;
+    width: 4px;
+    background: transparent;
+}
+::-webkit-scrollbar-thumb:horizontal{
+    background: var(--dark-grey);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:vertical{
+    background: var(--dark-grey);
+    border-radius: 10px;
+}
+
+
+@media screen and (max-width: 1075px) {
+    .grid-3-col-auto {
+        grid-template-columns: repeat(auto-fit, 17.5rem);
+        justify-content: center;
+    }
+}
+
+
