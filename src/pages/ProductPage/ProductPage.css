@@ -1,0 +1,125 @@
+@import url(../../styles/helper.css);
+@import url(../../styles/navbar.css);
+
+.green {
+    background-color: #1b9b1b;
+}
+
+.purple {
+    background-color: #632A50;
+}
+
+.prod-links .prod-btn .btn-primary {
+    padding: 5px 2rem;
+}
+
+.prod-links .prod-btn .btn-primary:hover {
+    background-color: var(--hover-color-btn-prim);
+    color: var(--background-color);
+}
+
+.card-badge .prod-links .prod-btn .prod-like i {
+    font-size: 1.5rem;
+    -webkit-text-stroke: 1px var(--background-color);
+}
+
+.all-prods.center {
+    flex-direction: column;
+    margin-top: 3rem;
+}
+
+.card-badge {
+    width: 17.5rem;
+    height: 30rem;
+    box-shadow: var(--box-shadow-2);
+    background-color: var(--light-grey);
+}
+
+.main {
+    grid-template-columns: 25% 1fr;
+    gap: 2em 0;
+}
+
+.products {
+    height: 100%;
+    gap: 2.5rem;
+}
+
+/* filter section */
+
+.sort-con form {
+    width: 100%;
+    border: transparent;
+    box-shadow: none;
+}
+
+.sort-con form:focus{
+    border: transparent;
+    outline: transparent;
+}
+
+.sort-con form div {
+    place-items: center;
+    place-content: start;
+}
+
+.price-field {
+    border: transparent;
+    box-shadow: none;
+}
+
+.input {
+    width: 15%;
+}
+
+.product-nm {
+    height: 2.5rem;
+}
+
+/* aside */
+
+aside {
+    position: sticky;
+    top: 6rem;
+    left: 0;
+    bottom: 0;
+    height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-right: 2px solid var(--bg-grey);
+}
+
+.filter-content .sort-con form div {
+    place-items: start;
+    align-items: center;
+}
+
+@media screen and (max-width: 1075px) {
+    aside {
+        position: static;
+        height: 4.5rem;
+        border-right: 2px solid transparent;
+    }
+    
+    .filter-content {
+        display: none;
+    }
+
+    .grid-1-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .products {
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center;
+    }
+    .card-badge {
+        width: 15rem;
+    }
+    main {
+        width: 100%;
+    }
+}
