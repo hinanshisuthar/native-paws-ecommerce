@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [show, toggleShow] = useState(false);
@@ -6,21 +7,19 @@ const Navbar = () => {
 
     const showOptions = () => {
         toggleShow(!show)
-        console.log(show)
     }
 
     const hamburgerMenu = () => {
         toggleHamburgerMenu(!showHamburgerMenu)
-        console.log(showHamburgerMenu)
     }
 
     return (
         <>
         <header className="page-header flex-col-sb">
             <div className="header-content flex-row-sb p-1">
-                <a href="/index.html" className="logo">
+                <Link to="/" className="logo">
                     <img src="https://res.cloudinary.com/do5ez3xws/image/upload/v1647500585/home/logo_bbmksz.webp" alt="logo" className="min-img img-responsive" />
-                </a>
+                </Link>
                 <div className="search-con flex-row-sb img-responsive">
                     <form action="#" className="form-search flex-row-sb">
                         <input type="text" className="text-rg pl-1" id="search-field" placeholder="Search the entire store..." />
@@ -30,9 +29,9 @@ const Navbar = () => {
                 </div>
                 <div className="flex-row-sb right-nav px-sm">
                     <div className="shop-con flex-row-sb">
-                        <a className="link" href="/screens/product-page.html">
+                        <Link to="/products" className="link">
                             <h5>Shop All Products</h5>
-                        </a>
+                        </Link>
                         <i className="fa-solid fa-angle-down"></i>
                     </div>
                     <div className="experience-con flex-row-sb">
