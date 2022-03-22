@@ -1,0 +1,62 @@
+@import url(../../styles/helper.css);
+@import url(../../styles/navbar.css);
+
+.card-badge {
+    width: 17.5rem;
+    height: 26rem;
+}
+
+.wish-prods {
+    margin: 0 13rem 0 17rem;
+    gap: 2rem 0;
+}
+
+.btn-badge-dismiss i {
+    color: var(--font-color-dark);
+    background-color: var(--bg-grey);
+    cursor: pointer;
+}
+
+.ratings-con i {
+    font-size: 1rem;
+}
+
+.prod-btn .btn {
+    padding: 5px;
+    text-transform: capitalize;
+    width: 90%;
+    border: 1px solid var(--cta-color);
+}
+
+.prod-btn .btn:hover {
+    background-color: var(--bg-grey);
+}
+
+hr {
+    width: 60%;
+    margin: auto;
+    border: 1px solid var(--bg-grey);
+}
+
+@media screen and (max-width: 1075px) {
+    .wish-prods {
+        margin: 0;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .title {
+        display: block;
+    }
+    .wish-prods {
+        margin: 3rem;
+    }
+}
+
+@media screen and (max-width: 285px) {
+    .wish-prods {
+        margin: 1rem;
+    }
+}
+
