@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "../../context/cart-context";
 import { useWishlist } from "../../context/wishlist-context";
 import { categorizedProducts } from "../../utilities/filters/categorizedProducts";
 import { pricedProducts } from "../../utilities/filters/priceRange";
@@ -10,6 +12,7 @@ const ProductRender = () => {
     const [products, setProducts] = useState([]);
     const {state} = useProduct();
     const {wishlistState, wishlistDispatch} = useWishlist();
+    const {cartState, cartDispatch} = useCart();
 
     async function fetchProducts() {
         try {
@@ -70,7 +73,15 @@ const ProductRender = () => {
             </a>
             <div className="prod-links">
                 <div className="prod-btn">
-                    <button className="btn btn-primary">Add to Bag</button>
+                    {
+                        cartState.cart.find((item) => item._id === product._id) ? (
+                            <Link to="/cart" className="router-link">
+                            <button className="btn btn-secondary">Go to Cart</button>
+                            </Link>
+                        ) : (
+                            <button className="btn btn-primary" onClick={() => cartDispatch({type: 'ADD_TO_CART', payload: product})}>Add to Cart</button>
+                        )
+                    }
                     {
                         wishlistState.wishlist.find((item) => item._id === product._id) ? (
                         <button className="prod-like" 
