@@ -1,0 +1,144 @@
+@import url(../../styles/helper.css);
+@import url(../../styles/navbar.css);
+
+.cart-cards {
+    gap: 1rem;
+    margin-left: 15rem;
+}
+
+.card-horizontal {
+    flex-wrap: nowrap;
+}
+
+.card-horizontal, .cart-cards {
+    border-bottom: 1px solid var(--bg-grey);
+    border-radius: 5px;
+    width: 32rem;
+}
+
+.card-horizontal .prod-btn {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.prod-quantity button {
+    border: 1px solid var(--bg-grey);
+    padding: 0px;
+}
+
+.prod-quantity {
+    justify-content: flex-start;
+}
+
+.hori-img {
+    min-width: 10rem;
+}
+
+.prod-btn {
+    justify-content: center;
+    align-items: center;
+}
+
+.prod-btn .btn {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#delete-btn {
+    font-size: 1rem;
+    padding: 1rem;
+    background-color: var(--sand-bg);
+}
+
+.cart-details .prod-btn {
+    background-color: var(--badge-background);
+}
+
+.hori-img:hover {
+    transform: scale(1.1);
+}
+
+.cart-details {
+    width: 25rem;
+}
+
+.price-con div {
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+#gift-form {
+    border: transparent;
+    place-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+#gift-form input {
+    flex-basis: 10%;
+}
+
+.place-order {
+    padding: 5px;
+    width: 100%;
+    text-transform: capitalize;
+    border: transparent;
+}
+
+.place-order:hover {
+    background-color: var(--hover-color-dark);
+    color: var(--background-color);
+}
+
+.cart-wrapper h1 {
+    border-bottom: 1px solid var(--bg-grey);;
+}
+
+.free {
+    margin-left: auto;
+    flex-basis: 19%;
+}
+
+.free span {
+    color: var(--cta-color);
+}
+
+.empty-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80%;
+}
+
+@media screen and (max-width: 495px) {
+    .card-horizontal {
+        flex-direction: column;
+        width: 18rem;
+    }
+    .cart-details {
+        width: 20rem;
+    }
+    .cart-cards {
+        width: 100%;
+    }
+    .prod-content {
+        align-items: center;
+    }
+    .prod-quantity, .card-horizontal .prod-links .prod-content .prod-info {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 1175px) {
+    .auto-flex {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .cart-cards {
+        margin-left: 0;
+    }
+}
+
