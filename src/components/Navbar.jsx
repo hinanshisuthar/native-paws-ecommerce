@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useWishlist } from "../context/wishlist-context";
 
 const Navbar = () => {
     const [show, toggleShow] = useState(false);
     const [showHamburgerMenu, toggleHamburgerMenu] = useState(false);
+    const {wishlistState} = useWishlist();
 
     const showOptions = () => {
         toggleShow(!show)
@@ -56,12 +58,13 @@ const Navbar = () => {
                         </div> }
                     </div>
                     <div className="wish-con">
-                        <a href="/screens/wishlist-page.html">
+                        <Link to="/wishlist">
                             <span className="badge-icon badge-container"><i
                                     className="fas fa-heart badge-icon-base text-md"></i>
-                                <span className="count-badge heart-badge-number">4</span>
+                                    {wishlistState.wishlist.length === 0 ? (<span></span>) : <span className="count-badge heart-badge-number">{wishlistState.wishlist.length}</span>}
+                                
                             </span>
-                        </a>
+                        </Link>
                     </div>
                     <div className="cart-con">
                         <a href="/screens/cart-page.html">
