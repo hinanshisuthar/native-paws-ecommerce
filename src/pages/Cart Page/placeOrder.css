@@ -1,0 +1,6 @@
+.toast {
+    width: max-content;
+    position: absolute;
+    top: 20%;
+    right: 5%;
+}

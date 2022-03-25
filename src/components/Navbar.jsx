@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/cart-context";
 import { useWishlist } from "../context/wishlist-context";
 
 const Navbar = () => {
     const [show, toggleShow] = useState(false);
     const [showHamburgerMenu, toggleHamburgerMenu] = useState(false);
     const {wishlistState} = useWishlist();
+    const {cartState} = useCart();
 
     const showOptions = () => {
         toggleShow(!show)
@@ -59,18 +61,28 @@ const Navbar = () => {
                     </div>
                     <div className="wish-con">
                         <Link to="/wishlist">
-                            <span className="badge-icon badge-container"><i
-                                    className="fas fa-heart badge-icon-base text-md"></i>
-                                    {wishlistState.wishlist.length === 0 ? (<span></span>) : <span className="count-badge heart-badge-number">{wishlistState.wishlist.length}</span>}
-                                
+                            <span className="badge-icon badge-container">
+                                <i className="fas fa-heart badge-icon-base text-md"></i>
+                                    {wishlistState.wishlist.length === 0 ? (
+                                        <span></span>) : <span className="count-badge heart-badge-number">
+                                            {wishlistState.wishlist.length}
+                                                         </span>
+                                    }
                             </span>
                         </Link>
                     </div>
                     <div className="cart-con">
-                        <a href="/screens/cart-page.html">
-                            <span className="badge-icon badge-container"><i className="fa-solid fa-cart-shopping text-md"></i>
-                            <span className="count-badge cart-badge-number">3</span></span>
-                        </a>
+                        <Link to="/cart">
+                            <span className="badge-icon badge-container">
+                                <i className="fa-solid fa-cart-shopping text-md"></i>
+                                    {cartState.cart.length === 0 ? (
+                                        <span></span>) : <span className="count-badge heart-badge-number">
+                                            {cartState.cart.length}
+                                                         </span>
+                                    }
+                                    
+                            </span>
+                        </Link>
                     </div>
                 </div>
                 <div className="bars-con" onClick={hamburgerMenu}>

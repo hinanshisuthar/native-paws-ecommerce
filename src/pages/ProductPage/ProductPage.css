@@ -9,9 +9,17 @@
     background-color: #632A50;
 }
 
+.prod-links .prod-btn {
+    justify-content: space-between;
+}
+
 .prod-links .prod-btn .btn-primary {
     padding: 5px 2rem;
     margin-right: 8px;
+}
+
+.router-link {
+    width: 100%;
 }
 
 .prod-links .prod-btn .btn-primary:hover {
@@ -21,7 +29,6 @@
 
 .card-badge .prod-links .prod-btn .prod-like i {
     font-size: 1.5rem;
-    /* -webkit-text-stroke: 1px var(--background-color); */
 }
 
 .all-prods.center {

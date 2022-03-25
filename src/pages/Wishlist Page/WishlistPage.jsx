@@ -1,10 +1,11 @@
-import { useEffect } from "react";
 import { Navbar } from "../../components/Navbar"
 import { VertDismissCard } from "../../components/VertDismissCard";
 import { useWishlist } from "../../context/wishlist-context";
 import './wishlist.css'
+import { Link } from "react-router-dom";
+
 const WishlistPage = () => {
-    const {wishlistState} = useWishlist();
+    const {wishlistState, WishlistDispatch} = useWishlist();
 return (
     <>
     <Navbar />
@@ -12,11 +13,13 @@ return (
             <h1 className="center p-md title">My Wishlist ( <span>{wishlistState.wishlist.length}</span>-items)</h1>
             <hr className="center" />
             {wishlistState.wishlist.length === 0 ? (
-                <h1 className="center p-md title">No items in Wishlist</h1>
+                <Link to="/products" className="center">
+                    <button className="btn btn-primary m-sm">Add products to Wishlist</button>
+                </Link>
             ) : (
             <div className="wish-prods grid grid-3-col grid-3-col-auto pt-md">
                 {wishlistState.wishlist.map((product) => {
-                    return <VertDismissCard product={product} />
+                    return <VertDismissCard product={product} id={product._id}/>
                 })}
             </div>
             )}
