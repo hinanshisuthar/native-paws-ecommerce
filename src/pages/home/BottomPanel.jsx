@@ -20,7 +20,7 @@ const BottomPanel = () => {
                         No fakes or duplicates</h6>
                 </div>
                 <div className="p-card center p-sm">
-                    <img src="https://res.cloudinary.com/do5ez3xws/image/upload/v1647500586/home/bb4_vt5wg9.png" alt="product-image" class="img-responsive bb-img" />
+                    <img src="https://res.cloudinary.com/do5ez3xws/image/upload/v1647500586/home/bb4_vt5wg9.png" alt="product-image" className="img-responsive bb-img" />
                     <h6>Best in-class Experts
                         Trained and verified professionals</h6>
                 </div>
