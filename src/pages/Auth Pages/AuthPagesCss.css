@@ -1,0 +1,133 @@
+@import url(../../styles/helper.css);
+@import url(../../styles/navbar.css);
+
+.wrapper-auth {
+    width: 100%;
+}
+
+.signup-con {
+    background-color: #ffebce;
+    box-shadow: rgba(0, 0, 0, 0.20) 0px 3px 8px;
+    width: 24rem;
+}
+
+.signup-con,
+.bottom {
+    gap: 8px;
+}
+
+.top {
+    background-color: var(--accent-color);
+    width: 100%;
+    border-radius: 5% 5% 45% 45%;
+    padding: 1.2rem 4rem 0 4rem;
+}
+
+#select-form {
+    width: 100%;
+    justify-content: space-around;
+}
+
+.select-form button,
+.sign-up-form button {
+    padding: 5px 5px;
+
+}
+
+.doodle {
+    width: 50%;
+}
+
+form,
+form input {
+    border: transparent;
+}
+
+.login-btn {
+    background-color: var(--light-grey);
+}
+
+.sign-up-form>* {
+    padding: var(--size-5) var(--size-10);
+    margin: var(--size-3) 0;
+}
+
+.sign-up-form input, .sign-up-form .pass-div {
+    border: 1px solid #808080;
+    border-radius: 8px 8px;
+}
+
+.sign-up-form .pass-div input {
+    border:1px solid transparent;
+    font-size: 0.9rem;
+}
+
+.pass-field:focus-visible {
+    border: transparent;
+    outline: transparent;
+}
+
+.pass-div {
+    padding: 0 1rem;
+}
+
+.sign-up-form button {
+    width: 100%;
+}
+
+.tnc {
+    place-items: center;
+    padding: 0;
+}
+
+/* log in */
+
+.li .bottom {
+    flex-grow: 1;
+    justify-content: flex-start;
+}
+
+/* log-out */
+
+.lo .bottom {
+    flex-grow: 1;
+}
+
+.lo .bottom {
+    justify-content: center;
+}
+
+.sign-up-btn:hover {
+    background-color: var(--hover-color-dark);
+    border: 2px solid transparent;
+    color: var(--background-color);
+}
+
+.forgot-pass-form div input {
+    flex-basis: 30%;
+}
+
+.forgot-pass-form div {
+    flex-grow: 0;
+    justify-content: flex-start;
+    flex-basis: 50%;
+}
+
+#su-submit {
+    padding: 0;
+}
+
+label {
+    display: inline-block;
+}
+
+form {
+    width: 100%;
+}
+
+@media screen and (max-width: 425px) {
+    .wrapper-auth {
+        width: 100%;
+    }
+}
+
