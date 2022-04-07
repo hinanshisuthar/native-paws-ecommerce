@@ -1,9 +1,10 @@
-import { useState } from "react";
 import { useWishlist } from "../context/wishlist-context";
+import { useCart } from "../context/cart-context";
 
 const VertDismissCard = ({product}) => {
     const {wishlistDispatch} = useWishlist();
-    return (
+    const {cartDispatch} = useCart();
+;    return (
         <div className="card-badge" id={product._id}>
             <div className="product">
                 <div className="prod-container">
@@ -22,7 +23,7 @@ const VertDismissCard = ({product}) => {
             </div>
             <div className="prod-links">
                 <div className="prod-btn">
-                    <button className="btn btn-secondary text-regular">
+                    <button className="btn btn-secondary text-regular" onClick={() => cartDispatch({type: 'ADD_TO_CART', payload: product})}>
                         <i className="fa-solid fa-cart-shopping thin"></i>
                         Move To Cart</button>
                 </div>

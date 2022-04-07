@@ -10,7 +10,6 @@ const cartReducer = (cartState, action) => {
                cart: [
                   ...cartState.cart, 
                   {...action.payload, quantity: 1}]}
-            return ;
         case 'INCREASE_QUANTITY':
             return {...cartState,
                cart: 
