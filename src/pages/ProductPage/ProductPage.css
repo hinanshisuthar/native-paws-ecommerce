@@ -102,6 +102,10 @@ aside {
     align-items: center;
 }
 
+.filters-arrow {
+    display: none;
+}
+
 @media screen and (max-width: 1075px) {
     aside {
         position: static;
@@ -113,8 +117,20 @@ aside {
         display: none;
     }
 
+    .filters-arrow {
+        display: block;
+    }
+
     .grid-1-col {
         grid-template-columns: 1fr;
+    }
+    .sort-con-res {
+        flex-grow: 1;
+    }
+    .flex-row-start {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
     }
 }
 

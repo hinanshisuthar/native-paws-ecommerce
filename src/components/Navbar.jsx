@@ -2,12 +2,16 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/cart-context";
 import { useWishlist } from "../context/wishlist-context";
+import { PlaceTag } from "../pages/Cart Page/PlaceOrder";
+import { useProduct } from "../utilities/ProductContext";
 
 const Navbar = () => {
   const [show, toggleShow] = useState(false);
   const [showHamburgerMenu, toggleHamburgerMenu] = useState(false);
   const { wishlistState } = useWishlist();
   const { cartState } = useCart();
+  const [showOfferTag, setShowOfferTag] = useState("none");
+  const { search, setSearch } = useProduct();
 
   const showOptions = () => {
     toggleShow(!show);
@@ -15,6 +19,10 @@ const Navbar = () => {
 
   const hamburgerMenu = () => {
     toggleHamburgerMenu(!showHamburgerMenu);
+  };
+
+  const handleOfferTag = () => {
+    setShowOfferTag("flex");
   };
 
   return (
@@ -35,6 +43,8 @@ const Navbar = () => {
                 className="text-rg pl-1"
                 id="search-field"
                 placeholder="Search the entire store..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
               <button type="submit" className="btn-icon pr-sm">
                 <i className="fa-solid fa-magnifying-glass search-icon thin"></i>
@@ -48,10 +58,12 @@ const Navbar = () => {
               </Link>
               <i className="fa-solid fa-angle-down"></i>
             </div>
-            <div className="experience-con flex-row-sb">
-              <Link className="link" to="/">
-                <h5>Offers</h5>
-              </Link>
+            <div
+              className="experience-con flex-row-sb link"
+              style={{ cursor: "pointer" }}>
+              <h5 onClick={handleOfferTag} className="link">
+                Offers
+              </h5>
             </div>
             <div className="location-con">
               <div className="location flex-row-sb">
@@ -153,6 +165,7 @@ const Navbar = () => {
           </div>
         )}
       </header>
+      {showOfferTag === "flex" ? <PlaceTag /> : showOfferTag === "none"}
     </>
   );
 };
