@@ -9,94 +9,135 @@ import { sortedProducts } from "../../utilities/filters/sort";
 import { useProduct } from "../../utilities/ProductContext";
 
 const ProductRender = () => {
-    const [products, setProducts] = useState([]);
-    const {state} = useProduct();
-    const {wishlistState, wishlistDispatch} = useWishlist();
-    const {cartState, cartDispatch} = useCart();
+  const [products, setProducts] = useState([]);
+  const { state } = useProduct();
+  const { wishlistState, wishlistDispatch } = useWishlist();
+  const { cartState, cartDispatch } = useCart();
+  const { search } = useProduct();
 
-    async function fetchProducts() {
-        try {
-            const productData = await axios.get('/api/products');
-            setProducts(productData.data.products)
-        }
-        catch(err) {
-            console.log(`An Error Occured: ${err}`);
-        }
+  async function fetchProducts() {
+    try {
+      const productData = await axios.get("/api/products");
+      setProducts(productData.data.products);
+    } catch (err) {
+      console.log(`An Error Occured: ${err}`);
     }
+  }
 
-    const getPricedProducts = pricedProducts(products, state.price)
+  const getPricedProducts = pricedProducts(products, state.price);
 
-    const getCategoryProducts = categorizedProducts(
-        getPricedProducts,
-        state.categories.food,
-        state.categories.leash,
-        state.categories.toys,
-        state.categories.clothes,
-        state.categories.small,
-        state.categories.medium,
-        state.categories.large,
-        state.categories.arrival,
-        state.categories.choice,
-        state.categories.bestseller,
-    );
+  const getCategoryProducts = categorizedProducts(
+    getPricedProducts,
+    state.categories.food,
+    state.categories.leash,
+    state.categories.toys,
+    state.categories.clothes,
+    state.categories.small,
+    state.categories.medium,
+    state.categories.large,
+    state.categories.arrival,
+    state.categories.choice,
+    state.categories.bestseller
+  );
 
-    const finalProductsToRender = sortedProducts(getCategoryProducts, state.sortBy);
+  const finalProductsToRender = sortedProducts(
+    getCategoryProducts,
+    state.sortBy
+  );
 
-    useEffect(() => fetchProducts(), [])
+  const getSearchedNotes = finalProductsToRender.filter((prod) => {
+    if (search === "") {
+      return prod;
+    } else if (prod.title.toLowerCase().includes(search.toLowerCase())) {
+      return prod;
+    }
+  });
 
-    return (
-        <div className="products grid grid-3-col grid-3-col-auto pt-2">
+  useEffect(() => fetchProducts(), []);
 
-            {
-                finalProductsToRender.map((product) => (
-                    <div className="card-badge" id={product._id} style={{height: '28rem'}}>
-            <a href="#" id="card-links">
-                <div className="product">
-                    <div className="prod-container">
-                        <img src={product.img}
-                            alt="product" className="prod-img" />
-                        <span className={`btn-badge ${product.tagColor}`}>{product.tag}</span>
-                    </div>
-                    <div className="prod-content">
-                        <h5 className="product-nm" style={{height: '1.5rem'}}>{product.title}</h5>
-                        <div className="prod-info">
-                            <span className="prod-price">Rs {product.price}</span>
-                            <span className="ratings-con" style={{fontSize: '1rem'}}>
-                                <i className="fas fa-star"></i>{product.rating}
-                            </span>
-                        </div>
-                        <div className="size-options" style={{margin: '0'}}>
-                            <button style={{borderRadius: '10px'}}>{product.size}</button>
-                        </div>
-                    </div>
+  return (
+    <div className="products grid grid-3-col grid-3-col-auto pt-2">
+      {getSearchedNotes.map((product) => (
+        <div
+          className="card-badge"
+          id={product._id}
+          key={product._id}
+          style={{ height: "28rem" }}>
+          <a href="#" id="card-links">
+            <div className="product">
+              <div className="prod-container">
+                <img src={product.img} alt="product" className="prod-img" />
+                <span className={`btn-badge ${product.tagColor}`}>
+                  {product.tag}
+                </span>
+              </div>
+              <div className="prod-content">
+                <h5 className="product-nm" style={{ height: "1.5rem" }}>
+                  {product.title}
+                </h5>
+                <div className="prod-info">
+                  <span className="prod-price">Rs {product.price}</span>
+                  <span className="ratings-con" style={{ fontSize: "1rem" }}>
+                    <i className="fas fa-star"></i>
+                    {product.rating}
+                  </span>
                 </div>
-            </a>
-            <div className="prod-links">
-                <div className="prod-btn">
-                    {
-                        cartState.cart.find((item) => item._id === product._id) ? (
-                            <Link to="/cart" className="router-link">
-                            <button className="btn btn-secondary">Go to Cart</button>
-                            </Link>
-                        ) : (
-                            <button className="btn btn-primary" onClick={() => cartDispatch({type: 'ADD_TO_CART', payload: product})}>Add to Cart</button>
-                        )
-                    }
-                    {
-                        wishlistState.wishlist.find((item) => item._id === product._id) ? (
-                        <button className="prod-like" 
-                                style={{color: '#f34e4e'}} 
-                                onClick={() => wishlistDispatch({type: 'REMOVE_FROM_WISHLIST', payload: product})}><i className="fa-solid fa-heart"></i></button>
-                                )  : (<button className="prod-like" style={{color: '#f34e4e'}} onClick={() => wishlistDispatch({type: 'ADD_TO_WISHLIST', payload: product})}><i className="fa fa-heart-o"></i></button>)
-                    }
-                    
+                <div className="size-options" style={{ margin: "0" }}>
+                  <button style={{ borderRadius: "10px" }}>
+                    {product.size}
+                  </button>
                 </div>
+              </div>
             </div>
+          </a>
+          <div className="prod-links">
+            <div className="prod-btn">
+              {cartState.cart.find((item) => item._id === product._id) ? (
+                <Link to="/cart" className="router-link">
+                  <button className="btn btn-secondary">Go to Cart</button>
+                </Link>
+              ) : (
+                <button
+                  className="btn btn-primary"
+                  onClick={() =>
+                    cartDispatch({ type: "ADD_TO_CART", payload: product })
+                  }>
+                  Add to Cart
+                </button>
+              )}
+              {wishlistState.wishlist.find(
+                (item) => item._id === product._id
+              ) ? (
+                <button
+                  className="prod-like"
+                  style={{ color: "#f34e4e" }}
+                  onClick={() =>
+                    wishlistDispatch({
+                      type: "REMOVE_FROM_WISHLIST",
+                      payload: product,
+                    })
+                  }>
+                  <i className="fa-solid fa-heart"></i>
+                </button>
+              ) : (
+                <button
+                  className="prod-like"
+                  style={{ color: "#f34e4e" }}
+                  onClick={() =>
+                    wishlistDispatch({
+                      type: "ADD_TO_WISHLIST",
+                      payload: product,
+                    })
+                  }>
+                  <i className="fa fa-heart-o"></i>
+                </button>
+              )}
+            </div>
+          </div>
         </div>
-                ))
-            }        
-        </div>
-    )
-}
+      ))}
+    </div>
+  );
+};
 
-export {ProductRender};
+export { ProductRender };
