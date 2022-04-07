@@ -5,7 +5,6 @@ import {Navbar} from '../../components/Navbar';
 const SignUp = () => {
   return (
     <>
-      <Navbar />
       <div className="wrapper-auth center mt-1">
         <div className="signup-con flex-col-sb p-0 pb-sm">
           <div className="top flex-col-sb">

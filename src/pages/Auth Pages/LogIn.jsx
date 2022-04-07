@@ -5,7 +5,6 @@ import "./AuthPagesCss.css";
 const LogIn = () => {
   return (
     <>
-      <Navbar />
       <div className="wrapper-auth center li mt-2">
         <div className="signup-con flex-col-sb p-0 pb-sm">
           <div className="top flex-col-sb">
