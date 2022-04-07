@@ -5,6 +5,7 @@ import { PlaceOrder } from "./PlaceOrder";
 const CartDetails = () => {
   const { cartState } = useCart();
   const [orderPlaced, setOrderPlaced] = useState('none');
+  const [offers, setOffers] = useState(0)
 
   const showOrderPlaced = () => {
     setOrderPlaced('flex');
@@ -15,14 +16,15 @@ const CartDetails = () => {
     0
   );
 
-  const couponDiscount = 100;
-
+  const showOfferDiscount = () => {
+    setOffers(200)
+  }
   return (
     <>
       <div className="cart-details p-1">
         <div className="prod-btn flex-row-sb p-1">
           <a className="link p-sm" href="#">
-            <h5>
+            <h5 onClick={showOfferDiscount}>
               <i className="fa-solid fa-tag"></i>Apply a coupon
             </h5>
           </a>
@@ -38,7 +40,7 @@ const CartDetails = () => {
           </div>
           <div className="flex-row-sb p-sm">
             Coupon Discount(in Rs)
-            <span>{couponDiscount}</span>
+            <span>{offers}</span>
           </div>
           <div className="flex-row-sb p-sm">
             Delivery Charges(in Rs)
@@ -50,7 +52,7 @@ const CartDetails = () => {
           <hr />
           <div className="flex-row-sb p-sm text-bold">
             Payable Amount(in Rs)
-            <span>{totalPrice - couponDiscount}</span>
+            <span>{totalPrice - offers}</span>
           </div>
         </div>
         <form action="#" className="flex-row-sb p-md" id="gift-form">
