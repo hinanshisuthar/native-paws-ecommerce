@@ -1,6 +1,6 @@
 <h1 align = "center">
   <br />
-  <a href="https://native-paws.netlify.app/"><img src="/assets/logo-img.png" alt="NTIVE PAWS LOGO" width="200"></a>
+  <a href="https://native-paws.netlify.app/"><img src="https://res.cloudinary.com/do5ez3xws/image/upload/v1647500585/home/logo_bbmksz.webp" alt="NTIVE PAWS LOGO" width="200"></a>
   <br />
   NATIVE PAWS
   <br />
