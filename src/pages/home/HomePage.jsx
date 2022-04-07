@@ -3,7 +3,6 @@ import { Navbar } from "../../components/Navbar"
 import { TopPanel } from "./TopPanel";
 import { HeroBanner } from './HeroBanner';
 import { TopCategories } from './TopCategories';
-import { SizeCategories } from './SizeCategories';
 import { BottomPanel } from './BottomPanel';
 import { Footer } from './Footer';
 
@@ -14,7 +13,6 @@ const HomePage = () => {
             <TopPanel />
             <HeroBanner />
             <TopCategories />
-            <SizeCategories />
             <BottomPanel />
             <Footer />
         </div>
