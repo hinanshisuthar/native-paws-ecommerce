@@ -22,11 +22,6 @@
 <br />
 
 ## ** About**
-
-<p align="center">
-  <img width="100%" src="/assets/walkthrough.gif" alt="NATIVE PAWS WALKTHROUGH"/>
-</p>
-
 <br />
 
 ## ** How To Use**
