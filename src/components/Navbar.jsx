@@ -25,6 +25,10 @@ const Navbar = () => {
     setShowOfferTag("flex");
   };
 
+  const searchHandler = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <>
       <header className="page-header flex-col-sb">
@@ -44,11 +48,14 @@ const Navbar = () => {
                 id="search-field"
                 placeholder="Search the entire store..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={searchHandler}
+                autoComplete="off"
               />
-              <button type="submit" className="btn-icon pr-sm">
-                <i className="fa-solid fa-magnifying-glass search-icon thin"></i>
-              </button>
+              <Link to="/products">
+                <button type="submit" className="btn-icon pr-sm" onClick={() => searchHandler}>
+                  <i className="fa-solid fa-magnifying-glass search-icon thin"></i>
+                </button>
+              </Link>
             </form>
           </div>
           <div className="flex-row-sb right-nav px-sm">
