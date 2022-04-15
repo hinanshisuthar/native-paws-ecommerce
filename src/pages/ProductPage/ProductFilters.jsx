@@ -23,7 +23,7 @@ const ProductFilters = () => {
     setShowFilters(!showFilters);
   };
   return (
-    <aside className="filters-sec p-2" style={{ height: "85vh" }}>
+    <aside className="filters-sec p-2">
       <div className="filter-con flex-row-sb my-sm">
         <button className="flex-row">
           <h3>FILTERS</h3>
