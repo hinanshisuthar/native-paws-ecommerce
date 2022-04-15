@@ -21,14 +21,14 @@ const Footer = () => {
                 <h5 className="p-sm">Connect with me.</h5>
 
                 <div className="social-links p-sm">
-                    <a href="https://github.com/hinanshisuthar/native-ui-library" target="_blank"
+                    <a href="https://github.com/hinanshisuthar/native-paws-react" target="_blank"
                         rel="noopener noreferrer"><i className="fab fa-github pointer-cursor p-sm"></i></a>
                     <a href="https://twitter.com/hinanshi04" target="_blank" rel="noopener noreferrer"><i
                             className="fab fa-twitter pointer-cursor p-sm"></i></a>
                     <a href="https://www.linkedin.com/in/hinanshi-suthar-7128201b0/" target="_blank"
                         rel="noopener noreferrer"><i className="fab fa-linkedin pointer-cursor p-sm"></i></a>
                 </div>
-                <small className="p-sm">© Native UI. 2020</small>
+                <small className="p-sm">© Native Paws.</small>
             </div>
         </footer>
     )
