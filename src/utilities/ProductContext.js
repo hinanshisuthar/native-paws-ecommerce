@@ -22,9 +22,10 @@ const ProductProvider = ({ children }) => {
     price: 500,
   });
   const [search, setSearch] = useState("");
-
+  const [products, setProducts] = useState([]);
+  
   return (
-    <ProductContext.Provider value={{ state, dispatch, search, setSearch }}>
+    <ProductContext.Provider value={{ state, dispatch, search, setSearch, products, setProducts }}>
       {children}
     </ProductContext.Provider>
   );
