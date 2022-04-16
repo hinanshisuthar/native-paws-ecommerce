@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/cart-context";
 import { useWishlist } from "../../context/wishlist-context";
@@ -9,8 +9,7 @@ import { sortedProducts } from "../../utilities/filters/sort";
 import { useProduct } from "../../utilities/ProductContext";
 
 const ProductRender = () => {
-  const [products, setProducts] = useState([]);
-  const { state } = useProduct();
+  const { state, products, setProducts } = useProduct();
   const { wishlistState, wishlistDispatch } = useWishlist();
   const { cartState, cartDispatch } = useCart();
   const { search } = useProduct();
@@ -63,7 +62,7 @@ const ProductRender = () => {
           id={product._id}
           key={product._id}
           style={{ height: "28rem" }}>
-          <a href="#" id="card-links">
+          <Link to={`/product/${product._id}`} id="card-links">
             <div className="product">
               <div className="prod-container">
                 <img src={product.img} alt="product" className="prod-img" />
@@ -89,7 +88,7 @@ const ProductRender = () => {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
           <div className="prod-links">
             <div className="prod-btn">
               {cartState.cart.find((item) => item._id === product._id) ? (
