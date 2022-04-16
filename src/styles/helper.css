@@ -19,15 +19,28 @@
     place-content: center;
 }
 
+.grid-40-60 {
+    grid-template-columns: 40% 1fr;
+}
+
 .grid-70-30 {
     grid-template-columns: 70% 1fr;
     place-content: center;
+}
+
+.flex-row-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .thin {
     -webkit-text-stroke: 1px var(--background-color);
 }
 
+.text-italic {
+    font-style: italic;
+}
 
 /* scroll bar */
 
