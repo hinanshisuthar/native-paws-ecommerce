@@ -8,6 +8,7 @@ import { SignUp } from "./pages/Auth Pages/SignUp";
 import { LogIn } from "./pages/Auth Pages/LogIn";
 import { LogOut } from "./pages/Auth Pages/LogOut";
 import { SingleProduct } from "./pages/single product page/SingleProductPage";
+import {_404Page} from './pages/404-page/404Page'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/log-in" element={<LogIn />} />
         <Route path="/log-out" element={<LogOut />} />
         <Route path="/product/:productId" element={<SingleProduct />} />
+        <Route path="/*" element={<_404Page />} />
       </Routes>
     </div>
   );
