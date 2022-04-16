@@ -16,6 +16,7 @@ export const products = [
     size: 'small',
     tagColor: 'green',
     categoryName: "food",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -27,6 +28,7 @@ export const products = [
     size: 'small',
     tagColor: 'purple',
     categoryName: "leash",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -38,6 +40,7 @@ export const products = [
     size: 'medium',
     tagColor: 'blue',
     categoryName: "food",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -49,6 +52,7 @@ export const products = [
     size: 'large',
     tagColor: 'purple',
     categoryName: "food",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -60,6 +64,7 @@ export const products = [
     size: 'medium',
     tagColor: 'purple',
     categoryName: "toys",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -71,6 +76,7 @@ export const products = [
     size: 'small',
     tagColor: 'blue',
     categoryName: "food",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -82,6 +88,7 @@ export const products = [
     size: 'large',
     tagColor: 'green',
     categoryName: "toys",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -93,6 +100,7 @@ export const products = [
     size: 'medium',
     tagColor: 'purple',
     categoryName: "toys",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -104,6 +112,7 @@ export const products = [
     size: 'medium',
     tagColor: 'green',
     categoryName: "clothes",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -115,6 +124,7 @@ export const products = [
     size: 'large',
     tagColor: 'green',
     categoryName: "toys",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -126,6 +136,7 @@ export const products = [
     size: 'small',
     tagColor: 'blue',
     categoryName: "clothes",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -137,6 +148,7 @@ export const products = [
     size: 'large',
     tagColor: 'blue',
     categoryName: "clothes",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -148,6 +160,7 @@ export const products = [
     size: 'small',
     tagColor: 'blue',
     categoryName: "leash",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -159,6 +172,7 @@ export const products = [
     size: 'small',
     tagColor: 'purple',
     categoryName: "clothes",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -170,6 +184,7 @@ export const products = [
     size: 'medium',
     tagColor: 'blue',
     categoryName: "food",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -181,6 +196,7 @@ export const products = [
     size: 'small',
     tagColor: 'green',
     categoryName: "toys",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -192,6 +208,7 @@ export const products = [
     size: 'medium',
     tagColor: 'green',
     categoryName: "leash",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -203,6 +220,7 @@ export const products = [
     size: 'large',
     tagColor: 'blue',
     categoryName: "leash",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -214,6 +232,7 @@ export const products = [
     size: 'large',
     tagColor: 'green',
     categoryName: "clothes",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
   {
     _id: uuid(),
@@ -225,5 +244,6 @@ export const products = [
     size: 'large',
     tagColor: 'purple',
     categoryName: "leash",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates possimus aperiam, facere nobis distinctio perspiciatis obcaecati",
   },
 ];
