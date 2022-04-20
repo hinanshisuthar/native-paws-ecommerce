@@ -1,8 +1,57 @@
-import { Link } from "react-router-dom";
-import { Navbar } from '../../components/Navbar';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { PlaceLogin } from "../Cart Page/PlaceOrder";
 import "./AuthPagesCss.css";
+import { useAuth } from "../../utilities/context/auth-context";
+import { loginHandler } from "../../backend/controllers/AuthController";
 
 const LogIn = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [showOfferTag, setShowOfferTag] = useState("none");
+
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
+  const inputChangeHandler = (e) => {
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const loginHandler = () => {
+    if (
+      credentials.email === "nativepaws@gmail.com" &&
+      credentials.password === "nativepaws"
+    ) {
+      setShowOfferTag("flex");
+
+      setTimeout(() => {
+        setIsLoggedIn((isLoggedIn) => !isLoggedIn);
+        navigate(location?.state?.from?.pathname, { replace: true });
+      }, 2000);
+    } else {
+      navigate("/");
+    }
+  };
+
+  const testLoginHandler = () => {
+    setCredentials({
+      email: "testuser123@gmail.com",
+      password: "testuser123",
+    });
+    setShowOfferTag("flex");
+
+    setTimeout(() => {
+      setIsLoggedIn((isLoggedIn) => !isLoggedIn);
+      navigate(location?.state?.from?.pathname, { replace: true });
+    }, 2000);
+  };
+
   return (
     <>
       <div className="wrapper-auth center li mt-2">
@@ -43,8 +92,20 @@ const LogIn = () => {
             </div>
             <p>Or you can manually log-in too</p>
             <form action="#" className="sign-up-form px-1">
-              <input type="email" placeholder="Email*" />
-              <input type="password" placeholder="Password*" />
+              <input
+                type="email"
+                placeholder="Email*"
+                name="email"
+                value={credentials.email}
+                onChange={inputChangeHandler}
+              />
+              <input
+                type="password"
+                placeholder="Password*"
+                name="password"
+                value={credentials.password}
+                onChange={inputChangeHandler}
+              />
             </form>
             <form action="#" className="forgot-pass-form flex-row-sb px-1">
               <div className="flex-row-sb">
@@ -59,10 +120,20 @@ const LogIn = () => {
                 </h6>
               </a>
             </form>
-            <button className="sign-up-btn btn btn-primary">log in</button>
+            <button
+              className="sign-up-btn btn btn-primary"
+              onClick={loginHandler}>
+              log in
+            </button>
+            <button
+              className="sign-up-btn btn btn-secondary"
+              onClick={testLoginHandler}>
+              Test Login
+            </button>
           </div>
         </div>
       </div>
+      {showOfferTag === "flex" ? <PlaceLogin /> : showOfferTag === "none"}
     </>
   );
 };
