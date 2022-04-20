@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart-context";
 import { useWishlist } from "../context/wishlist-context";
 import { PlaceTag } from "../pages/Cart Page/PlaceOrder";
+import { useAuth } from "../utilities/context/auth-context";
 import { useProduct } from "../utilities/ProductContext";
 
 const Navbar = () => {
@@ -12,6 +13,8 @@ const Navbar = () => {
   const { cartState } = useCart();
   const [showOfferTag, setShowOfferTag] = useState("none");
   const { search, setSearch } = useProduct();
+  const {setIsLoggedIn} = useAuth();
+  const navigate = useNavigate();
 
   const showOptions = () => {
     toggleShow(!show);
@@ -28,6 +31,11 @@ const Navbar = () => {
   const searchHandler = (e) => {
     setSearch(e.target.value);
   };
+
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
+    navigate('/');
+  }
 
   return (
     <>
@@ -89,14 +97,14 @@ const Navbar = () => {
                   id="myDropdown"
                   className="dropdown-content"
                   style={{ display: "block" }}>
-                  <Link to="/sign-up" className="p-1">
+                  <Link to="/signup" className="p-1">
                     Sign Up
                   </Link>
-                  <Link to="/log-in" className="p-1">
+                  <Link to="/login" className="p-1">
                     Log In
                   </Link>
                   <Link to="/log-out" className="p-1">
-                    Log Out
+                    <button onClick={logoutHandler}>Log out</button>
                   </Link>
                 </div>
               )}
@@ -164,10 +172,10 @@ const Navbar = () => {
               <Link to="/">Location</Link>
             </h5>
             <h5>
-              <Link to="/sign-up">Sign Up</Link>
+              <Link to="/signup">Sign Up</Link>
             </h5>
             <h5>
-              <Link to="/log-in">Log In</Link>
+              <Link to="/login">Log In</Link>
             </h5>
           </div>
         )}
