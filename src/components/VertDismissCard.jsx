@@ -42,7 +42,7 @@ const VertDismissCard = ({ product }) => {
           <button
             className="btn btn-secondary text-regular"
             onClick={() =>
-              dispatch({ type: "WISHLIST_TO_CART", payload: product })
+              cartDispatch({ type: "ADD_TO_CART", payload: product })
             }>
             <i className="fa-solid fa-cart-shopping thin"></i>
             Move To Cart
