@@ -9,7 +9,7 @@ import { sortedProducts } from "../../utilities/filters/sort";
 import { useProduct } from "../../utilities/ProductContext";
 
 const ProductRender = () => {
-  const { state, products, setProducts } = useProduct();
+  const { state, products, setProducts, dispatch } = useProduct();
   const { wishlistState, wishlistDispatch } = useWishlist();
   const { cartState, cartDispatch } = useCart();
   const { search } = useProduct();
@@ -22,6 +22,12 @@ const ProductRender = () => {
       console.log(`An Error Occured: ${err}`);
     }
   }
+
+  useEffect(() => {
+    return function cleanUp () {
+      dispatch({type: 'CLEAR'})
+    }
+  }, [])
 
   const getPricedProducts = pricedProducts(products, state.price);
 
