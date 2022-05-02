@@ -2,15 +2,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { PlaceLogin } from "../Cart Page/PlaceOrder";
 import "./AuthPagesCss.css";
-import { useAuth } from "../../utilities/context/auth-context";
 import { loginHandler } from "../../backend/controllers/AuthController";
+import { useAuth } from "../../context/auth-context";
+import axios from "axios";
 
 const LogIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showOfferTag, setShowOfferTag] = useState("none");
 
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const { auth, setAuth } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -23,33 +24,77 @@ const LogIn = () => {
     });
   };
 
-  const loginHandler = () => {
-    if (
-      credentials.email === "nativepaws@gmail.com" &&
-      credentials.password === "nativepaws"
-    ) {
-      setShowOfferTag("flex");
+  // const loginHandler = () => {
+  //   if (
+  //     credentials.email === "nativepaws@gmail.com" &&
+  //     credentials.password === "nativepaws"
+  //   ) {
+  //     setShowOfferTag("flex");
 
-      setTimeout(() => {
-        setIsLoggedIn((isLoggedIn) => !isLoggedIn);
-        navigate(location?.state?.from?.pathname, { replace: true });
-      }, 2000);
-    } else {
+  //     setTimeout(() => {
+  //       setIsLoggedIn((isLoggedIn) => !isLoggedIn);
+  //       navigate(location?.state?.from?.pathname, { replace: true });
+  //     }, 2000);
+  //   } else {
+  //     navigate("/");
+  //   }
+  // };
+
+  // const guestLoginHandler = () => {
+  //   setCredentials({
+  //     email: "testuser123@gmail.com",
+  //     password: "testuser123",
+  //   });
+  //   setShowOfferTag("flex");
+
+  //   setTimeout(() => {
+  //     setIsLoggedIn((isLoggedIn) => !isLoggedIn);
+  //     navigate(location?.state?.from?.pathname, { replace: true });
+  //   }, 2000);
+  // };
+
+  const loginUser = async () => {
+    try {
+      const loginResponse = await axios.post("/api/auth/login", credentials);
+
+      localStorage.setItem("USER_TOKEN", loginResponse.data.encodedToken);
+      localStorage.setItem(
+        "USER_DATA",
+        JSON.stringify({
+          password: loginResponse.data.foundUser.password,
+          email: loginResponse.data.foundUser.email,
+        })
+      );
+      setAuth({
+        isLoggedIn: true,
+        token: loginResponse.data.encodedToken,
+        user: {
+          password: loginResponse.data.foundUser.password,
+          email: loginResponse.data.foundUser.email,
+        },
+      });
       navigate("/");
+      // console.log("logged in")
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const testLoginHandler = () => {
+  const loginHandler = (e) => {
+    e.preventDefault();
     setCredentials({
-      email: "testuser123@gmail.com",
-      password: "testuser123",
+      email: "",
+      password: "",
     });
-    setShowOfferTag("flex");
+    loginUser();
+  };
 
-    setTimeout(() => {
-      setIsLoggedIn((isLoggedIn) => !isLoggedIn);
-      navigate(location?.state?.from?.pathname, { replace: true });
-    }, 2000);
+  const guestLoginHandler = () => {
+    setCredentials({
+      email: "guestlogin@gmail.com",
+      password: "guestlogin",
+    });
+    loginUser();
   };
 
   return (
@@ -91,7 +136,7 @@ const LogIn = () => {
               </div>
             </div>
             <p>Or you can manually log-in too</p>
-            <form action="#" className="sign-up-form px-1">
+            <form onSubmit={loginHandler} className="sign-up-form px-1">
               <input
                 type="email"
                 placeholder="Email*"
@@ -106,8 +151,8 @@ const LogIn = () => {
                 value={credentials.password}
                 onChange={inputChangeHandler}
               />
-            </form>
-            <form action="#" className="forgot-pass-form flex-row-sb px-1">
+              {/* </form> */}
+              {/* <form action="#" className="forgot-pass-form flex-row-sb px-1"> */}
               <div className="flex-row-sb">
                 <input type="checkbox" name="tnc" id="tnc" />
                 <label htmlFor="tnc">
@@ -119,17 +164,21 @@ const LogIn = () => {
                   Forgot Password?
                 </h6>
               </a>
+              {/* </form> */}
+              <button
+                className="sign-up-btn btn btn-primary"
+                // onClick={loginHandler}
+                type="submit"
+              >
+                log in
+              </button>
+              <button
+                className="sign-up-btn btn btn-secondary"
+                onClick={guestLoginHandler}
+              >
+                Test Login
+              </button>
             </form>
-            <button
-              className="sign-up-btn btn btn-primary"
-              onClick={loginHandler}>
-              log in
-            </button>
-            <button
-              className="sign-up-btn btn btn-secondary"
-              onClick={testLoginHandler}>
-              Test Login
-            </button>
           </div>
         </div>
       </div>

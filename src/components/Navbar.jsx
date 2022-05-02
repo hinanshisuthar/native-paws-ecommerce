@@ -3,14 +3,14 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart-context";
 import { useWishlist } from "../context/wishlist-context";
 import { PlaceTag } from "../pages/Cart Page/PlaceOrder";
-import { useAuth } from "../utilities/context/auth-context";
-import { useProduct } from "../utilities/ProductContext";
+import { useAuth } from "../context/auth-context";
+import { useProduct } from "../context/product-context";
 
 const Navbar = () => {
   const [show, toggleShow] = useState(false);
   const [showHamburgerMenu, toggleHamburgerMenu] = useState(false);
-  const { wishlistState } = useWishlist();
-  const { cartState } = useCart();
+  const { wishlist } = useWishlist();
+  const { cart } = useCart();
   const [showOfferTag, setShowOfferTag] = useState("none");
   const { search, setSearch } = useProduct();
   const {setIsLoggedIn} = useAuth();
@@ -113,11 +113,11 @@ const Navbar = () => {
               <Link to="/wishlist">
                 <span className="badge-icon badge-container">
                   <i className="fas fa-heart badge-icon-base text-md"></i>
-                  {wishlistState.wishlist.length === 0 ? (
+                  {wishlist.length === 0 ? (
                     <span></span>
                   ) : (
                     <span className="count-badge heart-badge-number">
-                      {wishlistState.wishlist.length}
+                      {wishlist.length}
                     </span>
                   )}
                 </span>
@@ -127,11 +127,11 @@ const Navbar = () => {
               <Link to="/cart">
                 <span className="badge-icon badge-container">
                   <i className="fa-solid fa-cart-shopping text-md"></i>
-                  {cartState.cart.length === 0 ? (
+                  {cart.length === 0 ? (
                     <span></span>
                   ) : (
                     <span className="count-badge heart-badge-number">
-                      {cartState.cart.length}
+                      {cart.length}
                     </span>
                   )}
                 </span>

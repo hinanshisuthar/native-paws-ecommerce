@@ -6,13 +6,17 @@ import { useWishlist } from "../../context/wishlist-context";
 import { categorizedProducts } from "../../utilities/filters/categorizedProducts";
 import { pricedProducts } from "../../utilities/filters/priceRange";
 import { sortedProducts } from "../../utilities/filters/sort";
-import { useProduct } from "../../utilities/ProductContext";
+import { useProduct } from "../../context/product-context";
+import { useFilter } from "../../context/filter-context";
+import { useAuth } from "../../context/auth-context";
 
 const ProductRender = () => {
-  const { state, products, setProducts, dispatch } = useProduct();
-  const { wishlistState, wishlistDispatch } = useWishlist();
-  const { cartState, cartDispatch } = useCart();
+  const { products, setProducts } = useProduct();
+  const {filterState, filterDispatch} = useFilter();
+  const { wishlist, addProductToWishlist, removeProductFromWishlist } = useWishlist();
+  const { cart, addProductToCart } = useCart();
   const { search } = useProduct();
+  const {auth} = useAuth();
 
   async function fetchProducts() {
     try {
@@ -25,29 +29,29 @@ const ProductRender = () => {
 
   useEffect(() => {
     return function cleanUp () {
-      dispatch({type: 'CLEAR'})
+      filterDispatch({type: 'CLEAR'})
     }
   }, [])
 
-  const getPricedProducts = pricedProducts(products, state.price);
+  const getPricedProducts = pricedProducts(products, filterState.price);
 
   const getCategoryProducts = categorizedProducts(
     getPricedProducts,
-    state.categories.food,
-    state.categories.leash,
-    state.categories.toys,
-    state.categories.clothes,
-    state.categories.small,
-    state.categories.medium,
-    state.categories.large,
-    state.categories.arrival,
-    state.categories.choice,
-    state.categories.bestseller
+    filterState.categories.food,
+    filterState.categories.leash,
+    filterState.categories.toys,
+    filterState.categories.clothes,
+    filterState.categories.small,
+    filterState.categories.medium,
+    filterState.categories.large,
+    filterState.categories.arrival,
+    filterState.categories.choice,
+    filterState.categories.bestseller
   );
 
   const finalProductsToRender = sortedProducts(
     getCategoryProducts,
-    state.sortBy
+    filterState.sortBy
   );
 
   const getSearchedNotes = finalProductsToRender.filter((prod) => {
@@ -97,43 +101,35 @@ const ProductRender = () => {
           </Link>
           <div className="prod-links">
             <div className="prod-btn">
-              {cartState.cart.find((item) => item._id === product._id) ? (
+              {cart.find((item) => item._id === product._id) ? (
                 <Link to="/cart" className="router-link">
                   <button className="btn btn-secondary">Go to Cart</button>
                 </Link>
               ) : (
                 <button
                   className="btn btn-primary"
-                  onClick={() =>
-                    cartDispatch({ type: "ADD_TO_CART", payload: product })
-                  }>
+                  onClick={() => {
+                    auth.isLoggedIn ? addProductToCart(product) : navigate('/login')
+                  }}>
                   Add to Cart
                 </button>
               )}
-              {wishlistState.wishlist.find(
+              {wishlist.find(
                 (item) => item._id === product._id
               ) ? (
                 <button
                   className="prod-like"
                   style={{ color: "#f34e4e" }}
-                  onClick={() =>
-                    wishlistDispatch({
-                      type: "REMOVE_FROM_WISHLIST",
-                      payload: product,
-                    })
-                  }>
+                  onClick={() => removeProductFromWishlist(product._id) }>
                   <i className="fa-solid fa-heart"></i>
                 </button>
               ) : (
                 <button
                   className="prod-like"
                   style={{ color: "#f34e4e" }}
-                  onClick={() =>
-                    wishlistDispatch({
-                      type: "ADD_TO_WISHLIST",
-                      payload: product,
-                    })
-                  }>
+                  onClick={() => {
+                    auth.isLoggedIn ? addProductToWishlist(product) : navigate('/login')
+                  }}>
                   <i className="fa fa-heart-o"></i>
                 </button>
               )}

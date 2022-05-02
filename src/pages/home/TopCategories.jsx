@@ -1,5 +1,5 @@
-import { useProduct } from "../../utilities/ProductContext";
 import { Link } from "react-router-dom";
+import { useProduct } from "../../context/product-context";
 
 const TopCategories = () => {
   const { dispatch } = useProduct();

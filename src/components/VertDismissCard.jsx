@@ -1,6 +1,6 @@
 import { useWishlist } from "../context/wishlist-context";
 import { useCart } from "../context/cart-context";
-import { useProduct } from "../utilities/ProductContext";
+import { useProduct } from "../context/product-context";
 
 const VertDismissCard = ({ product }) => {
   const { wishlistDispatch } = useWishlist();

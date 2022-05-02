@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useProduct } from "../../utilities/ProductContext";
+import { useProduct } from "../../context/product-context";
 
 const TopPanel = () => {
   const { dispatch } = useProduct();
