@@ -1,6 +1,5 @@
 import "./AuthPagesCss.css";
 import { Link } from "react-router-dom";
-import { Navbar } from "../../components/Navbar";
 
 const LogOut = () => {
   return (
@@ -25,8 +24,11 @@ const LogOut = () => {
             <form action="#" className="sign-up-form p-1 flex-col-sb px-1">
               <h3>We already miss you!</h3>
               <h4>Want to log in?</h4>
-              <Link to="/log-in">
-                <button className="sign-up-btn btn btn-primary">log in</button>
+              <Link to="/login">
+                <button className="sign-up-btn btn btn-secondary">log in</button>
+              </Link>
+              <Link to="/">
+                <button className="sign-up-btn btn">Home</button>
               </Link>
             </form>
           </div>

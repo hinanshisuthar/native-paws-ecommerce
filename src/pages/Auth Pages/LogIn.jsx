@@ -1,8 +1,72 @@
-import { Link } from "react-router-dom";
-import { Navbar } from '../../components/Navbar';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { PlaceLogin } from "../Cart Page/PlaceOrder";
 import "./AuthPagesCss.css";
+import { loginHandler } from "../../backend/controllers/AuthController";
+import { useAuth } from "../../context/auth-context";
+import axios from "axios";
 
 const LogIn = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [showOfferTag, setShowOfferTag] = useState("none");
+
+  const { auth, setAuth } = useAuth();
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
+  const inputChangeHandler = (e) => {
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const loginUser = async () => {
+    try {
+      const response = await axios.post("/api/auth/login", credentials);
+
+      localStorage.setItem("USER_TOKEN", response.data.encodedToken);
+      localStorage.setItem(
+        "USER_DATA",
+        JSON.stringify({
+          fullName: response.data.foundUser.fullName,
+          email: response.data.foundUser.email,
+        })
+      );
+      setAuth({
+        isLoggedIn: true,
+        token: response.data.encodedToken,
+        user: {
+          fullName: response.data.foundUser.fullName,
+          email: response.data.foundUser.email,
+        },
+      });
+      setShowOfferTag("flex");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+    setCredentials({
+      email: "",
+      password: "",
+    });
+    loginUser();
+  };
+
+  const guestLoginHandler = () => {
+    setCredentials({
+      email: "testuser@gmail.com",
+      password: "testuser*123",
+    });
+    loginUser();
+  };
+
   return (
     <>
       <div className="wrapper-auth center li mt-2">
@@ -22,12 +86,12 @@ const LogIn = () => {
           </div>
           <div className="bottom flex-col-sb">
             <div action="#" className="flex-row-sb" id="select-form">
-              <Link to="/sign-up" className="mx-md">
+              <Link to="/signup" className="mx-md">
                 <button type="submit" className="log-in-btn btn">
                   sign up
                 </button>
               </Link>
-              <Link to="/log-in" className="mx-md">
+              <Link to="/login" className="mx-md">
                 <button type="submit" className="sign-up-btn btn btn-primary">
                   log in
                 </button>
@@ -42,11 +106,21 @@ const LogIn = () => {
               </div>
             </div>
             <p>Or you can manually log-in too</p>
-            <form action="#" className="sign-up-form px-1">
-              <input type="email" placeholder="Email*" />
-              <input type="password" placeholder="Password*" />
-            </form>
-            <form action="#" className="forgot-pass-form flex-row-sb px-1">
+            <form onSubmit={loginHandler} className="sign-up-form px-1">
+              <input
+                type="email"
+                placeholder="Email*"
+                name="email"
+                value={credentials.email}
+                onChange={inputChangeHandler}
+              />
+              <input
+                type="password"
+                placeholder="Password*"
+                name="password"
+                value={credentials.password}
+                onChange={inputChangeHandler}
+              />
               <div className="flex-row-sb">
                 <input type="checkbox" name="tnc" id="tnc" />
                 <label htmlFor="tnc">
@@ -58,11 +132,20 @@ const LogIn = () => {
                   Forgot Password?
                 </h6>
               </a>
+              <button className="sign-up-btn btn btn-primary" type="submit">
+                log in
+              </button>
             </form>
-            <button className="sign-up-btn btn btn-primary">log in</button>
+            <button
+              className="sign-up-btn btn btn-secondary"
+              onClick={guestLoginHandler}
+            >
+              Guest Login
+            </button>
           </div>
         </div>
       </div>
+      {showOfferTag === "flex" ? <PlaceLogin /> : showOfferTag === "none"}
     </>
   );
 };

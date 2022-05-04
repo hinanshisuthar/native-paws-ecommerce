@@ -1,8 +1,10 @@
-import { useProduct } from "../../utilities/ProductContext";
 import { Link } from "react-router-dom";
+import { useFilter } from "../../context/filter-context";
+import { useProduct } from "../../context/product-context";
 
 const TopCategories = () => {
-  const { dispatch } = useProduct();
+  const {filterDispatch} = useFilter();
+
   return (
     <section className="categories flex-col-sb p-1 my-2">
       <div className="cat-text my-1">
@@ -12,7 +14,7 @@ const TopCategories = () => {
         <Link to="/products">
           <div
             className="cat center"
-            onClick={() => dispatch({ type: "TOYS" })}>
+            onClick={() => filterDispatch({ type: "TOYS" })}>
             <img
               src="https://res.cloudinary.com/do5ez3xws/image/upload/v1647500588/home/toys_l4zmsj.svg"
               alt="food-category"
@@ -24,7 +26,7 @@ const TopCategories = () => {
         <Link to="/products">
           <div
             className="cat center"
-            onClick={() => dispatch({ type: "FOOD" })}>
+            onClick={() => filterDispatch({ type: "FOOD" })}>
             <img
               src="https://res.cloudinary.com/do5ez3xws/image/upload/v1647500586/home/food_uwkbjc.jpg"
               alt="toys-category"
@@ -36,7 +38,7 @@ const TopCategories = () => {
         <Link to="/products">
           <div
             className="cat center"
-            onClick={() => dispatch({ type: "LEASH" })}>
+            onClick={() => filterDispatch({ type: "LEASH" })}>
             <img
               src="https://res.cloudinary.com/do5ez3xws/image/upload/v1647500589/home/leash_juk9vv.svg"
               alt="leash-category"
@@ -48,7 +50,7 @@ const TopCategories = () => {
         <Link to="/products">
           <div
             className="cat center"
-            onClick={() => dispatch({ type: "CLOTHES" })}>
+            onClick={() => filterDispatch({ type: "CLOTHES" })}>
             <img
               src="https://res.cloudinary.com/do5ez3xws/image/upload/v1647500590/home/cloth_ttnk0r.svg"
               alt="cloth-category"

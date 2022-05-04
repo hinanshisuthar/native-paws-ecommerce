@@ -1,23 +1,25 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
     return (
         <footer className="footer mt-2 flex-row-sb">
             <div className="flex-col-sb-start p-1">
                 <h3 className="m-sm">Quick Links</h3>
-                <a className="link link-footer m-sm" href="/index.html">
+                <Link className="link link-footer m-sm" to="/">
                     <h5>Home</h5>
-                </a>
-                <a className="link link-footer m-sm" href="/screens/product-page.html">
+                </Link>
+                <Link className="link link-footer m-sm" to="/products">
                     <h5>Shop All Products</h5>
-                </a>
-                <a className="link link-footer m-sm" href="/screens/wishlist-page.html">
+                </Link>
+                <Link className="link link-footer m-sm" to="wishlist">
                     <h5>My Wishlist</h5>
-                </a>
-                <a className="link link-footer m-sm" href="/screens/cart-page.html">
+                </Link>
+                <Link className="link link-footer m-sm" to="/cart">
                     <h5>My Shopping Cart</h5>
-                </a>
+                </Link>
             </div>
             <div className="flex-col-sb-start p-1">
-                <h5 className="p-sm text-center">Made with <i className="fa fa-heart"></i> by Hinanshi Suthar</h5>
+                <h5 className="p-sm text-center">Made with <i className="fa fa-heart"></i></h5>
                 <h5 className="p-sm">Connect with me.</h5>
 
                 <div className="social-links p-sm">

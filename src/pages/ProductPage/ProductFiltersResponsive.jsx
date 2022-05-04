@@ -1,4 +1,4 @@
-import { useProduct } from "../../utilities/ProductContext";
+import { useProduct } from "../../context/product-context";
 
 const ProductFiltersResponsive = () => {
   const { state, dispatch } = useProduct();

@@ -3,22 +3,22 @@ import { useCart } from "../../context/cart-context";
 import { PlaceOrder } from "./PlaceOrder";
 
 const CartDetails = () => {
-  const { cartState } = useCart();
-  const [orderPlaced, setOrderPlaced] = useState('none');
-  const [offers, setOffers] = useState(0)
+  const { cart } = useCart();
+  const [orderPlaced, setOrderPlaced] = useState("none");
+  const [offers, setOffers] = useState(0);
 
   const showOrderPlaced = () => {
-    setOrderPlaced('flex');
+    setOrderPlaced("flex");
   };
 
-  const totalPrice = cartState.cart.reduce(
+  const totalPrice = cart.reduce(
     (acc, curr) => acc + Number(curr.price) * Number(curr.quantity),
     0
   );
 
   const showOfferDiscount = () => {
-    setOffers(200)
-  }
+    setOffers(200);
+  };
   return (
     <>
       <div className="cart-details p-1">
@@ -31,7 +31,7 @@ const CartDetails = () => {
         </div>
         <div className="price-con p-1 flex-col-sb">
           <h5 className="p-sm">
-            PRICE DETAILS (<span>{cartState.cart.length}</span> items)
+            PRICE DETAILS (<span>{cart.length}</span> items)
           </h5>
           <hr />
           <div className="flex-row-sb p-sm">
@@ -63,11 +63,12 @@ const CartDetails = () => {
         </form>
         <button
           className="btn btn-primary place-order"
-          onClick={showOrderPlaced}>
+          onClick={showOrderPlaced}
+        >
           <i className="fa-solid fa-truck-fast"></i>Place Order
         </button>
       </div>
-      {orderPlaced === 'flex' ? <PlaceOrder /> : orderPlaced === 'none'}
+      {orderPlaced === "flex" ? <PlaceOrder /> : orderPlaced === "none"}
     </>
   );
 };
