@@ -6,7 +6,6 @@ import { CartDetails } from "./CartDetails";
 import { Link } from "react-router-dom";
 
 const CartPage = () => {
-  // const {cartState} = useCart();
   const { cart } = useCart();
   return (
     <>

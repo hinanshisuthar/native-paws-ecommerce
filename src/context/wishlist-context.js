@@ -4,29 +4,7 @@ import { useAuth } from "./auth-context";
 
 const WishlistContext = createContext();
 
-// const wishlistReducerFunc = (wishlistState, action) => {
-//   switch (action.type) {
-//     case "REMOVE_FROM_WISHLIST":
-//       return {
-//         ...wishlistState,
-//         wishlist: wishlistState.wishlist.filter(
-//           (product) => product._id != action.payload._id
-//         ),
-//       };
-//     case "ADD_TO_WISHLIST":
-//       return {
-//         ...wishlistState,
-//         wishlist: [...wishlistState.wishlist, { ...action.payload }],
-//       };
-//     default:
-//       return wishlistState;
-//   }
-// };
-
 const WishlistProvider = ({ children }) => {
-//   const [wishlistState, wishlistDispatch] = useReducer(wishlistReducerFunc, {
-//     wishlist: [],
-//   });
   const [wishlist, setWishlist] = useState([]);
 
   const axios = require("axios").default;
@@ -83,8 +61,6 @@ const WishlistProvider = ({ children }) => {
   return (
     <WishlistContext.Provider
       value={{
-        // wishlistState,
-        // wishlistDispatch,
         wishlist,
         setWishlist,
         addProductToWishlist,

@@ -24,57 +24,27 @@ const LogIn = () => {
     });
   };
 
-  // const loginHandler = () => {
-  //   if (
-  //     credentials.email === "nativepaws@gmail.com" &&
-  //     credentials.password === "nativepaws"
-  //   ) {
-  //     setShowOfferTag("flex");
-
-  //     setTimeout(() => {
-  //       setIsLoggedIn((isLoggedIn) => !isLoggedIn);
-  //       navigate(location?.state?.from?.pathname, { replace: true });
-  //     }, 2000);
-  //   } else {
-  //     navigate("/");
-  //   }
-  // };
-
-  // const guestLoginHandler = () => {
-  //   setCredentials({
-  //     email: "testuser123@gmail.com",
-  //     password: "testuser123",
-  //   });
-  //   setShowOfferTag("flex");
-
-  //   setTimeout(() => {
-  //     setIsLoggedIn((isLoggedIn) => !isLoggedIn);
-  //     navigate(location?.state?.from?.pathname, { replace: true });
-  //   }, 2000);
-  // };
-
   const loginUser = async () => {
     try {
-      const loginResponse = await axios.post("/api/auth/login", credentials);
+      const response = await axios.post("/api/auth/login", credentials);
 
-      localStorage.setItem("USER_TOKEN", loginResponse.data.encodedToken);
+      localStorage.setItem("USER_TOKEN", response.data.encodedToken);
       localStorage.setItem(
         "USER_DATA",
         JSON.stringify({
-          password: loginResponse.data.foundUser.password,
-          email: loginResponse.data.foundUser.email,
+          fullName: response.data.foundUser.fullName,
+          email: response.data.foundUser.email,
         })
       );
       setAuth({
         isLoggedIn: true,
-        token: loginResponse.data.encodedToken,
+        token: response.data.encodedToken,
         user: {
-          password: loginResponse.data.foundUser.password,
-          email: loginResponse.data.foundUser.email,
+          fullName: response.data.foundUser.fullName,
+          email: response.data.foundUser.email,
         },
       });
-      navigate("/");
-      // console.log("logged in")
+      setShowOfferTag("flex");
     } catch (error) {
       console.log(error);
     }
@@ -91,8 +61,8 @@ const LogIn = () => {
 
   const guestLoginHandler = () => {
     setCredentials({
-      email: "guestlogin@gmail.com",
-      password: "guestlogin",
+      email: "testuser@gmail.com",
+      password: "testuser*123",
     });
     loginUser();
   };
@@ -116,12 +86,12 @@ const LogIn = () => {
           </div>
           <div className="bottom flex-col-sb">
             <div action="#" className="flex-row-sb" id="select-form">
-              <Link to="/sign-up" className="mx-md">
+              <Link to="/signup" className="mx-md">
                 <button type="submit" className="log-in-btn btn">
                   sign up
                 </button>
               </Link>
-              <Link to="/log-in" className="mx-md">
+              <Link to="/login" className="mx-md">
                 <button type="submit" className="sign-up-btn btn btn-primary">
                   log in
                 </button>
@@ -151,8 +121,6 @@ const LogIn = () => {
                 value={credentials.password}
                 onChange={inputChangeHandler}
               />
-              {/* </form> */}
-              {/* <form action="#" className="forgot-pass-form flex-row-sb px-1"> */}
               <div className="flex-row-sb">
                 <input type="checkbox" name="tnc" id="tnc" />
                 <label htmlFor="tnc">
@@ -164,21 +132,16 @@ const LogIn = () => {
                   Forgot Password?
                 </h6>
               </a>
-              {/* </form> */}
-              <button
-                className="sign-up-btn btn btn-primary"
-                // onClick={loginHandler}
-                type="submit"
-              >
+              <button className="sign-up-btn btn btn-primary" type="submit">
                 log in
               </button>
-              <button
-                className="sign-up-btn btn btn-secondary"
-                onClick={guestLoginHandler}
-              >
-                Test Login
-              </button>
             </form>
+            <button
+              className="sign-up-btn btn btn-secondary"
+              onClick={guestLoginHandler}
+            >
+              Guest Login
+            </button>
           </div>
         </div>
       </div>

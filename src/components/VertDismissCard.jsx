@@ -1,11 +1,9 @@
 import { useWishlist } from "../context/wishlist-context";
 import { useCart } from "../context/cart-context";
-import { useProduct } from "../context/product-context";
 
 const VertDismissCard = ({ product }) => {
   const { wishlistDispatch } = useWishlist();
   const { cartDispatch } = useCart();
-  const {dispatch} = useProduct();
 
   return (
     <div className="card-badge" id={product._id}>
@@ -19,11 +17,13 @@ const VertDismissCard = ({ product }) => {
                 type: "REMOVE_FROM_WISHLIST",
                 payload: product,
               })
-            }>
+            }
+          >
             <i
               className="fa-solid fa-heart px-sm"
               id="close-card"
-              style={{ color: "#f34e4e" }}></i>
+              style={{ color: "#f34e4e" }}
+            ></i>
           </span>
         </div>
         <div className="prod-content">
@@ -43,7 +43,8 @@ const VertDismissCard = ({ product }) => {
             className="btn btn-secondary text-regular"
             onClick={() =>
               cartDispatch({ type: "ADD_TO_CART", payload: product })
-            }>
+            }
+          >
             <i className="fa-solid fa-cart-shopping thin"></i>
             Move To Cart
           </button>

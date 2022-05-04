@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart-context";
 import { useWishlist } from "../context/wishlist-context";
 import { PlaceTag } from "../pages/Cart Page/PlaceOrder";
@@ -13,7 +13,7 @@ const Navbar = () => {
   const { cart } = useCart();
   const [showOfferTag, setShowOfferTag] = useState("none");
   const { search, setSearch } = useProduct();
-  const {setIsLoggedIn} = useAuth();
+  const { setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   const showOptions = () => {
@@ -34,8 +34,8 @@ const Navbar = () => {
 
   const logoutHandler = () => {
     setIsLoggedIn(false);
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   return (
     <>
@@ -60,7 +60,11 @@ const Navbar = () => {
                 autoComplete="off"
               />
               <Link to="/products">
-                <button type="submit" className="btn-icon pr-sm" onClick={() => searchHandler}>
+                <button
+                  type="submit"
+                  className="btn-icon pr-sm"
+                  onClick={() => searchHandler}
+                >
                   <i className="fa-solid fa-magnifying-glass search-icon thin"></i>
                 </button>
               </Link>
@@ -75,7 +79,8 @@ const Navbar = () => {
             </div>
             <div
               className="experience-con flex-row-sb link"
-              style={{ cursor: "pointer" }}>
+              style={{ cursor: "pointer" }}
+            >
               <h5 onClick={handleOfferTag} className="link">
                 Offers
               </h5>
@@ -96,7 +101,8 @@ const Navbar = () => {
                 <div
                   id="myDropdown"
                   className="dropdown-content"
-                  style={{ display: "block" }}>
+                  style={{ display: "block" }}
+                >
                   <Link to="/signup" className="p-1">
                     Sign Up
                   </Link>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/cart-context";
 import { useWishlist } from "../../context/wishlist-context";
 import { categorizedProducts } from "../../utilities/filters/categorizedProducts";
@@ -12,11 +12,14 @@ import { useAuth } from "../../context/auth-context";
 
 const ProductRender = () => {
   const { products, setProducts } = useProduct();
-  const {filterState, filterDispatch} = useFilter();
-  const { wishlist, addProductToWishlist, removeProductFromWishlist } = useWishlist();
+  const { filterState, filterDispatch } = useFilter();
+  const { wishlist, addProductToWishlist, removeProductFromWishlist } =
+    useWishlist();
   const { cart, addProductToCart } = useCart();
   const { search } = useProduct();
-  const {auth} = useAuth();
+  const { auth } = useAuth();
+
+  const navigate = useNavigate();
 
   async function fetchProducts() {
     try {
@@ -28,10 +31,10 @@ const ProductRender = () => {
   }
 
   useEffect(() => {
-    return function cleanUp () {
-      filterDispatch({type: 'CLEAR'})
-    }
-  }, [])
+    return function cleanUp() {
+      filterDispatch({ type: "CLEAR" });
+    };
+  }, []);
 
   const getPricedProducts = pricedProducts(products, filterState.price);
 
@@ -71,7 +74,8 @@ const ProductRender = () => {
           className="card-badge"
           id={product._id}
           key={product._id}
-          style={{ height: "28rem" }}>
+          style={{ height: "28rem" }}
+        >
           <Link to={`/product/${product._id}`} id="card-links">
             <div className="product">
               <div className="prod-container">
@@ -109,18 +113,20 @@ const ProductRender = () => {
                 <button
                   className="btn btn-primary"
                   onClick={() => {
-                    auth.isLoggedIn ? addProductToCart(product) : navigate('/login')
-                  }}>
+                    !auth.isLoggedIn
+                      ? addProductToCart(product)
+                      : navigate("/login");
+                  }}
+                >
                   Add to Cart
                 </button>
               )}
-              {wishlist.find(
-                (item) => item._id === product._id
-              ) ? (
+              {wishlist.find((item) => item._id === product._id) ? (
                 <button
                   className="prod-like"
                   style={{ color: "#f34e4e" }}
-                  onClick={() => removeProductFromWishlist(product._id) }>
+                  onClick={() => removeProductFromWishlist(product._id)}
+                >
                   <i className="fa-solid fa-heart"></i>
                 </button>
               ) : (
@@ -128,8 +134,11 @@ const ProductRender = () => {
                   className="prod-like"
                   style={{ color: "#f34e4e" }}
                   onClick={() => {
-                    auth.isLoggedIn ? addProductToWishlist(product) : navigate('/login')
-                  }}>
+                    !auth.isLoggedIn
+                      ? addProductToWishlist(product)
+                      : navigate("/login");
+                  }}
+                >
                   <i className="fa fa-heart-o"></i>
                 </button>
               )}

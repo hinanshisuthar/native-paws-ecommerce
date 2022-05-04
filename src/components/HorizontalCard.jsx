@@ -4,16 +4,15 @@ import { useWishlist } from "../context/wishlist-context";
 import "../pages/ProductPage/ProductPage.css";
 
 const HorizontalCard = ({ product }) => {
-  // const {cartState, cartDispatch} = useCart();
   const { removeProductFromCart, updateProductQntyInCart } = useCart();
 
-  // const { wishlistState, wishlistDispatch} = useWishlist();
   const {
     wishlist,
     setWishlist,
     addProductToWishlist,
     removeProductFromWishlist,
   } = useWishlist();
+  
   return (
     <div className="card-horizontal flex-row-sb" id={product._id}>
       <div className="product">
@@ -55,7 +54,7 @@ const HorizontalCard = ({ product }) => {
           ) : (
             <button
               className="btn btn-primary"
-              onClick={() => addProductToWishlist(product) }
+              onClick={() => addProductToWishlist(product)}
             >
               Add To Wishlist
             </button>
@@ -64,7 +63,7 @@ const HorizontalCard = ({ product }) => {
           <h5>
             <button
               className=""
-              onClick={() =>removeProductFromCart(product._id) }
+              onClick={() => removeProductFromCart(product._id)}
             >
               <i className="fas fa-trash-alt" id="delete-btn"></i>
             </button>

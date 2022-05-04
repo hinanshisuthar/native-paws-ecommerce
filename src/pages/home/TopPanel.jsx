@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import { useProduct } from "../../context/product-context";
+import { useFilter } from "../../context/filter-context";
 
 const TopPanel = () => {
-  const { dispatch } = useProduct();
+  const {filterDispatch} = useFilter();
   return (
     <div className="grid-6-col-auto pet-cards py-1 px-2 hori-scroll">
       <Link to="/products" className="router-link-prods">
         <div
           className="p-card center"
-          onClick={() => dispatch({ type: "SMALL" })}>
+          onClick={() => filterDispatch({ type: "SMALL" })}>
           <a href="#" className="p-img center">
             <img
               src="https://www.zigly.com/media/wysiwyg/for_dogs.png"
@@ -24,7 +24,7 @@ const TopPanel = () => {
       <Link to="/products" className="router-link-prods">
         <div
           className="p-card center"
-          onClick={() => dispatch({ type: "MEDIUM" })}>
+          onClick={() => filterDispatch({ type: "MEDIUM" })}>
           <a href="#" className="p-img center">
             <img
               src="https://www.zigly.com/media/wysiwyg/for_cats.png"
@@ -40,7 +40,7 @@ const TopPanel = () => {
       <Link to="/products" className="router-link-prods">
         <div
           className="p-card center"
-          onClick={() => dispatch({ type: "LARGE" })}>
+          onClick={() => filterDispatch({ type: "LARGE" })}>
           <a href="#" className="p-img center">
             <img
               src="https://www.zigly.com/media/wysiwyg/puppy-store.png"
@@ -55,7 +55,7 @@ const TopPanel = () => {
       <Link to="/products" className="router-link-prods">
         <div
           className="p-card center"
-          onClick={() => dispatch({ type: "BEST_SELLER" })}>
+          onClick={() => filterDispatch({ type: "BEST_SELLER" })}>
           <a href="#" className="p-img center">
             <img
               src="https://www.zigly.com/media/wysiwyg/vet-consulting.png"
@@ -71,7 +71,7 @@ const TopPanel = () => {
       <Link to="/products" className="router-link-prods">
         <div
           className="p-card center"
-          onClick={() => dispatch({ type: "CHOICE" })}>
+          onClick={() => filterDispatch({ type: "CHOICE" })}>
           <a href="#" className="p-img center">
             <img
               src="https://www.zigly.com/media/wysiwyg/pet-grooming.png"
@@ -87,7 +87,7 @@ const TopPanel = () => {
       <Link to="/products" className="router-link-prods">
         <div
           className="p-card center"
-          onClick={() => dispatch({ type: "NEW" })}>
+          onClick={() => filterDispatch({ type: "NEW" })}>
           <a href="#" className="p-img center">
             <img
               src="https://www.zigly.com/media/wysiwyg/exp-center.png"
