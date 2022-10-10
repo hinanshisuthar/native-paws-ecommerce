@@ -7523,10 +7523,10 @@
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   "version" "1.0.4"
 
-"mockman-js@^1.0.5":
-  "integrity" "sha512-fMQ4K7/M0j/UpfMpU3NNCKyJkuHDPxbJ11AIwn85BNnb3ktsKpAl3M5zXzNWHaBNcjpjySfNrJVpQfET7EVgKA=="
-  "resolved" "https://registry.npmjs.org/mockman-js/-/mockman-js-1.0.5.tgz"
-  "version" "1.0.5"
+"mockman-js@^1.1.5":
+  "integrity" "sha512-3dH9DjsfFkSGwQ7sNwTi70xE73odvdP4z/0nszb0fXT2N3ov3pabfTWFtY4rmSME6B64+7t3bewVUfurzeOnzw=="
+  "resolved" "https://registry.npmjs.org/mockman-js/-/mockman-js-1.1.5.tgz"
+  "version" "1.1.5"
   dependencies:
     "axios" "^0.24.0"
     "react-json-view" "^1.21.3"
@@ -9274,7 +9274,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@^17.0.0 || ^16.3.0 || ^15.5.4", "react-dom@^17.0.2", "react-dom@>=16.8":
+"react-dom@^17.0.0 || ^16.3.0 || ^15.5.4", "react-dom@^17.0.2", "react-dom@>=16.8", "react-dom@>16.0.0":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -9333,7 +9333,7 @@
   dependencies:
     "history" "^5.2.0"
 
-"react-scripts@4.0.3":
+"react-scripts@^4.0.3":
   "integrity" "sha512-S5eO4vjUzUisvkIPB7jVsKtuH2HhWcASREYWHAQ1FP5HyCv3xgn+wpILAEWkmy+A+tTNbSZClhxjT3qz6g4L1A=="
   "resolved" "https://registry.npmjs.org/react-scripts/-/react-scripts-4.0.3.tgz"
   "version" "4.0.3"
@@ -9408,7 +9408,7 @@
     "use-composed-ref" "^1.0.0"
     "use-latest" "^1.0.0"
 
-"react@^15.0.2 || ^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^17.0.0 || ^16.3.0 || ^15.5.4", "react@^17.0.2", "react@>= 16", "react@>=16.8", "react@17.0.2":
+"react@^15.0.2 || ^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^17.0.0 || ^16.3.0 || ^15.5.4", "react@^17.0.2", "react@>= 16", "react@>=16.8", "react@>16.0.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

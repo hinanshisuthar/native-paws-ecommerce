@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 const SingleProductCard = (product) => {
   const { _id, title, tag, price, rating, img, tagColor, size, description } =
     product;
-  const { cartState, cartDispatch } = useCart();
-  const { wishlistState, wishlistDispatch } = useWishlist();
+  const { cart, addProductToCart } = useCart();
+  const { wishlist, addProductToWishlist, removeProductFromWishlist } = useWishlist();
 
   return (
     <div className="center product-con" key={_id}>
@@ -39,43 +39,31 @@ const SingleProductCard = (product) => {
           </p>
           <div className="prod-links prod-quicks p-1">
             <div className="prod-btn flex-col-sb p-sm">
-              {cartState.cart.find((item) => item._id === product._id) ? (
+              {cart.find((item) => item._id === product._id) ? (
                 <Link to="/cart" className="router-link m-sm">
                   <button className="btn btn-secondary ml-md">Go to Cart</button>
                 </Link>
               ) : (
                 <button
                   className="btn btn-primary m-sm"
-                  onClick={() =>
-                    cartDispatch({ type: "ADD_TO_CART", payload: product })
-                  }>
+                  onClick={() => addProductToCart(product)}>
                   Add to Cart
                 </button>
               )}
-              {wishlistState.wishlist.find(
+              {wishlist.find(
                 (item) => item._id === product._id
               ) ? (
                 <button
                   className="prod-like btn btn-secondary m-sm"
                   style={{ color: "#f34e4e" }}
-                  onClick={() =>
-                    wishlistDispatch({
-                      type: "REMOVE_FROM_WISHLIST",
-                      payload: product,
-                    })
-                  }>
+                  onClick={() => removeProductFromWishlist(product._id)}>
                   Go To WishList
                 </button>
               ) : (
                 <button
                   className="prod-like btn btn-secondary m-sm"
                   style={{ color: "#f34e4e" }}
-                  onClick={() =>
-                    wishlistDispatch({
-                      type: "ADD_TO_WISHLIST",
-                      payload: product,
-                    })
-                  }>
+                  onClick={() => addProductToWishlist(product)}>
                   Add To WishList
                 </button>
               )}

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Navbar } from "../../components/Navbar";
-import { useProduct } from "../../utilities/ProductContext";
+import { useProduct } from "../../context/product-context";
 import { SingleProductCard } from "./SingleProductCard";
 
 const SingleProduct = () => {

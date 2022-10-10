@@ -44,4 +44,25 @@ const PlaceTag = () => {
   );
 };
 
-export { PlaceOrder, PlaceTag };
+const PlaceLogin = () => {
+  const [closeTag, setCloseTag] = useState("flex");
+
+  const closeTagPlaced = () => {
+    setCloseTag("none");
+  };
+
+  return (
+    <div
+      className="toast toast-success py-sm px-1 flex-row-sb"
+      style={{ display: `${closeTag}` }}>
+      <div className="toast-content">
+        You're successfully logged in!
+      </div>
+      <div className="toast-dismiss">
+        <i className="fa fa-times" onClick={closeTagPlaced}></i>
+      </div>
+    </div>
+  );
+};
+
+export { PlaceOrder, PlaceTag, PlaceLogin };
