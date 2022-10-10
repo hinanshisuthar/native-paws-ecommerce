@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useProduct } from "../../utilities/ProductContext";
+import { useProduct } from "../../context/product-context";
 import { ProductFiltersResponsive } from "./ProductFiltersResponsive";
+import { useFilter } from '../../context/filter-context'
 
 const ProductFilters = () => {
-  const { state, dispatch } = useProduct();
-  const { sortBy, categories, price } = state;
+  const { filterState: { sortBy, categories, price }, filterDispatch } = useFilter();
   const {
     food,
     leash,
@@ -19,11 +19,13 @@ const ProductFilters = () => {
   } = categories;
   const [showFilters, setShowFilters] = useState(false);
 
+  // const { filterState, filterDispatch} = useFilter();
+
   const showFiltersMenu = () => {
     setShowFilters(!showFilters);
   };
   return (
-    <aside className="filters-sec p-2" style={{ height: "85vh" }}>
+    <aside className="filters-sec p-2">
       <div className="filter-con flex-row-sb my-sm">
         <button className="flex-row">
           <h3>FILTERS</h3>
@@ -36,7 +38,7 @@ const ProductFilters = () => {
           <h5>
             <button
               className="clear-all-btn"
-              onClick={() => dispatch({ type: "CLEAR" })}>
+              onClick={() => filterDispatch({ type: "CLEAR" })}>
               clear all
             </button>
           </h5>
@@ -57,7 +59,7 @@ const ProductFilters = () => {
                   name="sort"
                   className="input"
                   checked={sortBy === "HIGH_TO_LOW"}
-                  onChange={() => dispatch({ type: "HIGH_TO_LOW" })}
+                  onChange={() => filterDispatch({ type: "HIGH_TO_LOW" })}
                 />
                 Price: High to Low
               </label>
@@ -69,7 +71,7 @@ const ProductFilters = () => {
                   name="sort"
                   className="input"
                   checked={sortBy === "LOW_TO_HIGH"}
-                  onChange={() => dispatch({ type: "LOW_TO_HIGH" })}
+                  onChange={() => filterDispatch({ type: "LOW_TO_HIGH" })}
                 />
                 Price: Low to High
               </label>
@@ -81,7 +83,7 @@ const ProductFilters = () => {
                   name="sort"
                   className="input"
                   checked={sortBy === "RATING_HIGH_TO_LOW"}
-                  onChange={() => dispatch({ type: "RATING_HIGH_TO_LOW" })}
+                  onChange={() => filterDispatch({ type: "RATING_HIGH_TO_LOW" })}
                 />
                 Rating: High to Low
               </label>
@@ -93,7 +95,7 @@ const ProductFilters = () => {
                   name="sort"
                   className="input"
                   checked={sortBy === "RATING_LOW_TO_HIGH"}
-                  onChange={() => dispatch({ type: "RATING_LOW_TO_HIGH" })}
+                  onChange={() => filterDispatch({ type: "RATING_LOW_TO_HIGH" })}
                 />
                 Rating: Low to High
               </label>
@@ -111,7 +113,7 @@ const ProductFilters = () => {
                 max="500"
                 value={price}
                 onChange={(e) =>
-                  dispatch({ type: "PRICE", price: e.target.value })
+                  filterDispatch({ type: "PRICE", price: e.target.value })
                 }
               />
               {price} and below
@@ -130,7 +132,7 @@ const ProductFilters = () => {
                   value="food"
                   name="categories-name"
                   checked={food}
-                  onChange={() => dispatch({ type: "FOOD" })}
+                  onChange={() => filterDispatch({ type: "FOOD" })}
                 />
                 Food
               </label>
@@ -142,7 +144,7 @@ const ProductFilters = () => {
                   value="leash"
                   name="categories-name"
                   checked={leash}
-                  onChange={() => dispatch({ type: "LEASH" })}
+                  onChange={() => filterDispatch({ type: "LEASH" })}
                 />
                 Leash, Harness
               </label>
@@ -154,7 +156,7 @@ const ProductFilters = () => {
                   value="toys"
                   name="categories-name"
                   checked={toys}
-                  onChange={() => dispatch({ type: "TOYS" })}
+                  onChange={() => filterDispatch({ type: "TOYS" })}
                 />
                 Toys
               </label>
@@ -166,7 +168,7 @@ const ProductFilters = () => {
                   value="clothes"
                   name="categories-name"
                   checked={clothes}
-                  onChange={() => dispatch({ type: "CLOTHES" })}
+                  onChange={() => filterDispatch({ type: "CLOTHES" })}
                 />
                 Clothes
               </label>
@@ -182,7 +184,7 @@ const ProductFilters = () => {
                   value="small"
                   name="categories-name"
                   checked={small}
-                  onChange={() => dispatch({ type: "SMALL" })}
+                  onChange={() => filterDispatch({ type: "SMALL" })}
                 />
                 Small
               </label>
@@ -194,7 +196,7 @@ const ProductFilters = () => {
                   value="medium"
                   name="categories-name"
                   checked={medium}
-                  onChange={() => dispatch({ type: "MEDIUM" })}
+                  onChange={() => filterDispatch({ type: "MEDIUM" })}
                 />
                 Medium
               </label>
@@ -206,7 +208,7 @@ const ProductFilters = () => {
                   value="large"
                   name="categories-name"
                   checked={large}
-                  onChange={() => dispatch({ type: "LARGE" })}
+                  onChange={() => filterDispatch({ type: "LARGE" })}
                 />
                 Large
               </label>
@@ -222,7 +224,7 @@ const ProductFilters = () => {
                   value="bestseller"
                   name="categories-name"
                   checked={bestseller}
-                  onChange={() => dispatch({ type: "BEST_SELLER" })}
+                  onChange={() => filterDispatch({ type: "BEST_SELLER" })}
                 />
                 Best Seller
               </label>
@@ -234,7 +236,7 @@ const ProductFilters = () => {
                   value="arrival"
                   name="categories-name"
                   checked={arrival}
-                  onChange={() => dispatch({ type: "NEW" })}
+                  onChange={() => filterDispatch({ type: "NEW" })}
                 />
                 New
               </label>
@@ -246,7 +248,7 @@ const ProductFilters = () => {
                   value="choice"
                   name="categories-name"
                   checked={choice}
-                  onChange={() => dispatch({ type: "CHOICE" })}
+                  onChange={() => filterDispatch({ type: "CHOICE" })}
                 />
                 Native's Choice
               </label>

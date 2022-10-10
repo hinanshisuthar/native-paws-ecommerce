@@ -1,0 +1,7 @@
+.error-img-container img{
+    height: 94.8vh;
+}
+
+.error-img-container {
+    background-color: var(--sand-bg);
+}

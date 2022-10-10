@@ -1,17 +1,20 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart-context";
 import { useWishlist } from "../context/wishlist-context";
 import { PlaceTag } from "../pages/Cart Page/PlaceOrder";
-import { useProduct } from "../utilities/ProductContext";
+import { useAuth } from "../context/auth-context";
+import { useProduct } from "../context/product-context";
 
 const Navbar = () => {
   const [show, toggleShow] = useState(false);
   const [showHamburgerMenu, toggleHamburgerMenu] = useState(false);
-  const { wishlistState } = useWishlist();
-  const { cartState } = useCart();
+  const { wishlist } = useWishlist();
+  const { cart } = useCart();
   const [showOfferTag, setShowOfferTag] = useState("none");
   const { search, setSearch } = useProduct();
+  const { setIsLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   const showOptions = () => {
     toggleShow(!show);
@@ -23,6 +26,15 @@ const Navbar = () => {
 
   const handleOfferTag = () => {
     setShowOfferTag("flex");
+  };
+
+  const searchHandler = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
+    navigate("/");
   };
 
   return (
@@ -44,11 +56,18 @@ const Navbar = () => {
                 id="search-field"
                 placeholder="Search the entire store..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={searchHandler}
+                autoComplete="off"
               />
-              <button type="submit" className="btn-icon pr-sm">
-                <i className="fa-solid fa-magnifying-glass search-icon thin"></i>
-              </button>
+              <Link to="/products">
+                <button
+                  type="submit"
+                  className="btn-icon pr-sm"
+                  onClick={() => searchHandler}
+                >
+                  <i className="fa-solid fa-magnifying-glass search-icon thin"></i>
+                </button>
+              </Link>
             </form>
           </div>
           <div className="flex-row-sb right-nav px-sm">
@@ -60,7 +79,8 @@ const Navbar = () => {
             </div>
             <div
               className="experience-con flex-row-sb link"
-              style={{ cursor: "pointer" }}>
+              style={{ cursor: "pointer" }}
+            >
               <h5 onClick={handleOfferTag} className="link">
                 Offers
               </h5>
@@ -81,15 +101,16 @@ const Navbar = () => {
                 <div
                   id="myDropdown"
                   className="dropdown-content"
-                  style={{ display: "block" }}>
-                  <Link to="/sign-up" className="p-1">
+                  style={{ display: "block" }}
+                >
+                  <Link to="/signup" className="p-1">
                     Sign Up
                   </Link>
-                  <Link to="/log-in" className="p-1">
+                  <Link to="/login" className="p-1">
                     Log In
                   </Link>
                   <Link to="/log-out" className="p-1">
-                    Log Out
+                    <button onClick={logoutHandler}>Log out</button>
                   </Link>
                 </div>
               )}
@@ -98,11 +119,11 @@ const Navbar = () => {
               <Link to="/wishlist">
                 <span className="badge-icon badge-container">
                   <i className="fas fa-heart badge-icon-base text-md"></i>
-                  {wishlistState.wishlist.length === 0 ? (
+                  {wishlist.length === 0 ? (
                     <span></span>
                   ) : (
                     <span className="count-badge heart-badge-number">
-                      {wishlistState.wishlist.length}
+                      {wishlist.length}
                     </span>
                   )}
                 </span>
@@ -112,11 +133,11 @@ const Navbar = () => {
               <Link to="/cart">
                 <span className="badge-icon badge-container">
                   <i className="fa-solid fa-cart-shopping text-md"></i>
-                  {cartState.cart.length === 0 ? (
+                  {cart.length === 0 ? (
                     <span></span>
                   ) : (
                     <span className="count-badge heart-badge-number">
-                      {cartState.cart.length}
+                      {cart.length}
                     </span>
                   )}
                 </span>
@@ -157,10 +178,10 @@ const Navbar = () => {
               <Link to="/">Location</Link>
             </h5>
             <h5>
-              <Link to="/sign-up">Sign Up</Link>
+              <Link to="/signup">Sign Up</Link>
             </h5>
             <h5>
-              <Link to="/log-in">Log In</Link>
+              <Link to="/login">Log In</Link>
             </h5>
           </div>
         )}

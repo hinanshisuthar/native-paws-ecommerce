@@ -1,0 +1,19 @@
+.product-con {
+    margin: 4rem 12rem;
+    box-shadow: var(--box-shadow-2);
+    border-radius: var(--size-3);
+}
+
+.prod-img-con {
+    border-right: 1px solid;
+    background-color: var(--badge-background);
+}
+
+.prod-tag {
+    color: var(--light-grey);
+    border-radius: var(--size-6);
+}
+
+.prod-quicks {
+    width: 100%;
+}

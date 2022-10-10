@@ -60,12 +60,12 @@
     display: none;
 }
 
-.cat img:hover {
+.cat img {
     opacity: 0.5;
     cursor: pointer;
 }
 
-.cat img:hover+.overlay-text {
+.cat img+.overlay-text {
     display: block;
 }
 
