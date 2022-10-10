@@ -1,16 +1,68 @@
 import { createContext, useContext, useState } from "react";
+import { loginService } from "../services/loginService";
+import { signUpService } from "../services/signUpService";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({
-    isLoggedIn: localStorage.getItem("USER_TOKEN") ? true : false,
-    token: localStorage.getItem("USER_TOKEN"),
-    user: JSON.parse(localStorage.getItem("USER_DATA")),
-  });
+  const localStorageToken = JSON.parse(localStorage.getItem("login"));
+  const [token, setToken] = useState(localStorageToken?.token);
+  const localStorageUser = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(localStorageUser?.user);
+
+  const loginUser = async (email, password) => {
+    if (email && password !== "") {
+      try {
+        const {
+          data: { foundUser, encodedToken },
+          status,
+        } = await loginService(email, password);
+
+        if (status === 200) {
+          localStorage.setItem(
+            "login",
+            JSON.stringify({ token: encodedToken })
+          );
+          setToken(encodedToken);
+          localStorage.setItem("user", JSON.stringify({ user: foundUser }));
+          setUser(foundUser);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const createNewUser = async (email, password, firstName, lastName) => {
+    try {
+      const {
+        data: { createdUser, encodedToken },
+        status,
+      } = await signUpService(email, password, firstName, lastName);
+
+      if (status === 200) {
+        localStorage.setItem("signup", JSON.stringify({ token: encodedToken }));
+        setToken(encodedToken);
+        localStorage.setItem("user", JSON.stringify({ user: createdUser }));
+        setUser(createdUser);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider
+      value={{
+        token,
+        setToken,
+        user,
+        setToken,
+        loginUser,
+        createNewUser,
+        setUser,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

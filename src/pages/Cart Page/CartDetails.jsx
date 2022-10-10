@@ -12,13 +12,14 @@ const CartDetails = () => {
   };
 
   const totalPrice = cart.reduce(
-    (acc, curr) => acc + Number(curr.price) * Number(curr.quantity),
+    (acc, curr) => acc + Number(curr.price) * Number(curr.qty),
     0
   );
 
   const showOfferDiscount = () => {
     setOffers(200);
   };
+
   return (
     <>
       <div className="cart-details p-1">

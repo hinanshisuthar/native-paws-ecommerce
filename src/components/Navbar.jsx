@@ -13,7 +13,7 @@ const Navbar = () => {
   const { cart } = useCart();
   const [showOfferTag, setShowOfferTag] = useState("none");
   const { search, setSearch } = useProduct();
-  const { setIsLoggedIn } = useAuth();
+  const { token, setUser, setToken } = useAuth();
   const navigate = useNavigate();
 
   const showOptions = () => {
@@ -33,8 +33,15 @@ const Navbar = () => {
   };
 
   const logoutHandler = () => {
-    setIsLoggedIn(false);
-    navigate("/");
+    localStorage.removeItem("login");
+    localStorage.removeItem("user");
+    localStorage.removeItem("signup");
+
+    setUser(null);
+    setToken("");
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
   };
 
   return (
@@ -103,15 +110,15 @@ const Navbar = () => {
                   className="dropdown-content"
                   style={{ display: "block" }}
                 >
-                  <Link to="/signup" className="p-1">
-                    Sign Up
-                  </Link>
-                  <Link to="/login" className="p-1">
-                    Log In
-                  </Link>
-                  <Link to="/log-out" className="p-1">
-                    <button onClick={logoutHandler}>Log out</button>
-                  </Link>
+                  {token ? (
+                    <Link to="/log-out" className="p-1">
+                      <button onClick={logoutHandler}>Log out</button>
+                    </Link>
+                  ) : (
+                    <Link to="/login" className="p-1">
+                      Log In
+                    </Link>
+                  )}
                 </div>
               )}
             </div>

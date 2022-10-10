@@ -1,67 +1,33 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./AuthPagesCss.css";
-import { Navbar } from "../../components/Navbar";
 import { useState } from "react";
 import { useAuth } from "../../context/auth-context";
-import axios from "axios";
 
 const SignUp = () => {
   const [signupCredentials, setSignupCredentials] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
-    passwordAgain: "",
   });
-
+  const { token, createNewUser } = useAuth();
   const navigate = useNavigate();
-  const { auth, setAuth } = useAuth();
 
   const signupHandler = (e) => {
     e.preventDefault();
-
-    if (signupCredentials.password !== signupCredentials.passwordAgain) {
-      console.log("passwords does not match");
-    } else {
-      setSignupCredentials({
-        fullName: "",
-        email: "",
-        password: "",
-        passwordAgain: "",
-      });
-
-      const createNewUser = async () => {
-        try {
-          const response = await axios.post("/api/auth/signup", {
-            fullName: signupCredentials.fullName,
-            email: signupCredentials.email,
-            password: signupCredentials.password,
-          });
-
-          localStorage.setItem("USER_TOKEN", response.data.encodedToken);
-          localStorage.setItem(
-            "USER_DATA",
-            JSON.stringify({
-              fullName: response.data.createdUser.fullName,
-              email: response.data.createdUser.email,
-            })
-          );
-
-          setAuth({
-            isLoggedIn: true,
-            token: response.data.encodedToken,
-            user: {
-              fullName: response.data.createdUser.fullName,
-              email: response.data.createdUser.email,
-            },
-          });
-          console.log(response);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      createNewUser();
+    const { email, password, firstName, lastName } = signupCredentials;
+    if (email && password && firstName && lastName !== "") {
+      (async () => {
+        createNewUser(email, password, firstName, lastName);
+      })();
     }
   };
+
+  if (token) {
+    setTimeout(() => {
+      navigate(location?.state?.from || "/products", { replace: true });
+    }, 500);
+  }
 
   return (
     <>
@@ -93,35 +59,56 @@ const SignUp = () => {
                 </button>
               </Link>
             </div>
-            <div className="flex-row-sb">
-              <h4 className="mr-sm">Continue with</h4>
-              <div className="size-options m-0">
-                <button>
-                  <i className="fa fa-google"></i>
-                </button>
-              </div>
-            </div>
-            <p>Or you can manually sign-up too</p>
-            <form action="#" className="sign-up-form px-1" onSubmit={signupHandler}>
-              <input type="text" placeholder="Full Name*" value={signupCredentials.fullName} onChange={(e) => setSignupCredentials({...signupCredentials, fullName: e.target.value})}/>
-              <input type="email" placeholder="Email*" value={signupCredentials.email} onChange={(e) => setSignupCredentials({...signupCredentials, email: e.target.value})} />
+            <form
+              action="#"
+              className="sign-up-form px-1"
+              onSubmit={signupHandler}
+            >
+              <input
+                type="text"
+                placeholder="FirstName*"
+                value={signupCredentials.firstName}
+                onChange={(e) =>
+                  setSignupCredentials({
+                    ...signupCredentials,
+                    firstName: e.target.value,
+                  })
+                }
+              />
+              <input
+                type="text"
+                placeholder="LastName*"
+                value={signupCredentials.lastName}
+                onChange={(e) =>
+                  setSignupCredentials({
+                    ...signupCredentials,
+                    lastName: e.target.value,
+                  })
+                }
+              />
+              <input
+                type="email"
+                placeholder="Email*"
+                value={signupCredentials.email}
+                onChange={(e) =>
+                  setSignupCredentials({
+                    ...signupCredentials,
+                    email: e.target.value,
+                  })
+                }
+              />
               <div className="flex-row-sb pass-div">
                 <input
                   type="password"
                   placeholder="Password*"
                   className="pass-field"
                   value={signupCredentials.password}
-                  onChange={(e) => setSignupCredentials({...signupCredentials, password: e.target.value})}
-                />
-                <i className="fa fa-eye-slash" aria-hidden="true"></i>
-              </div>
-              <div className="flex-row-sb pass-div">
-                <input
-                  type="password"
-                  placeholder="Confirm Password*"
-                  className="pass-field"
-                  value={signupCredentials.passwordAgain}
-                  onChange={(e) => setSignupCredentials({...signupCredentials, passwordAgain: e.target.value})}
+                  onChange={(e) =>
+                    setSignupCredentials({
+                      ...signupCredentials,
+                      password: e.target.value,
+                    })
+                  }
                 />
                 <i className="fa fa-eye-slash" aria-hidden="true"></i>
               </div>
@@ -134,7 +121,9 @@ const SignUp = () => {
                   </small>
                 </label>
               </div>
-              <button className="sign-up-btn btn btn-primary" type="submit">sign up</button>
+              <button className="sign-up-btn btn btn-primary" type="submit">
+                sign up
+              </button>
             </form>
           </div>
         </div>

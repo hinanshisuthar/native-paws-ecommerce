@@ -1,9 +1,11 @@
 import { useWishlist } from "../context/wishlist-context";
 import { useCart } from "../context/cart-context";
+import { useNavigate } from "react-router-dom";
 
 const VertDismissCard = ({ product }) => {
-  const { wishlistDispatch } = useWishlist();
-  const { cartDispatch } = useCart();
+  const { removeProductFromWishlist } = useWishlist();
+  const { addProductToCart, cart } = useCart();
+  const navigate = useNavigate();
 
   return (
     <div className="card-badge" id={product._id}>
@@ -12,12 +14,7 @@ const VertDismissCard = ({ product }) => {
           <img src={product.img} alt="product" />
           <span
             className="btn-badge-dismiss"
-            onClick={() =>
-              wishlistDispatch({
-                type: "REMOVE_FROM_WISHLIST",
-                payload: product,
-              })
-            }
+            onClick={() => removeProductFromWishlist(product._id)}
           >
             <i
               className="fa-solid fa-heart px-sm"
@@ -39,15 +36,23 @@ const VertDismissCard = ({ product }) => {
       </div>
       <div className="prod-links">
         <div className="prod-btn">
-          <button
-            className="btn btn-secondary text-regular"
-            onClick={() =>
-              cartDispatch({ type: "ADD_TO_CART", payload: product })
-            }
-          >
-            <i className="fa-solid fa-cart-shopping thin"></i>
-            Move To Cart
-          </button>
+          {cart.find((item) => item._id === product._id) ? (
+            <button
+              className="btn btn-secondary text-regular"
+              onClick={() => navigate("/cart")}
+            >
+              <i className="fa-solid fa-cart-shopping thin"></i>
+              Go To Cart
+            </button>
+          ) : (
+            <button
+              className="btn btn-secondary text-regular"
+              onClick={() => addProductToCart(product)}
+            >
+              <i className="fa-solid fa-cart-shopping thin"></i>
+              Move To Cart
+            </button>
+          )}
         </div>
       </div>
     </div>

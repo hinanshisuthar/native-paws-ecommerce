@@ -8,35 +8,24 @@ const WishlistProvider = ({ children }) => {
   const [wishlist, setWishlist] = useState([]);
 
   const axios = require("axios").default;
-  const { auth } = useAuth();
-
-  useEffect(() => {
-    if (auth.isLoggedIn) {
-      (async () => {
-        const wishlistResponse = await axios.get("/api/user/wishlist", {
-          headers: {
-            authorization: auth.token,
-          },
-        });
-        setWishlist(wishlistResponse.data.wishlist);
-      })();
-    } else {
-      setWishlist([]);
-    }
-  }, [auth]);
+  const { token } = useAuth();
 
   const addProductToWishlist = async (product) => {
     try {
-      const addToWishlistResponse = await axios.post(
+      const {
+        data: { wishlist },
+      } = await axios.post(
         "/api/user/wishlist",
-        { product },
+        {
+          product,
+        },
         {
           headers: {
-            authorization: auth.token,
+            authorization: token,
           },
         }
       );
-      setWishlist(addToWishlistResponse.data.wishlist);
+      setWishlist(wishlist);
     } catch (error) {
       console.log(error);
     }
@@ -44,15 +33,14 @@ const WishlistProvider = ({ children }) => {
 
   const removeProductFromWishlist = async (productId) => {
     try {
-      const removeFromWishlistResponse = await axios.delete(
-        `/api/user/wishlist/${productId}`,
-        {
-          headers: {
-            authorization: auth.token,
-          },
-        }
-      );
-      setWishlist(removeFromWishlistResponse.data.wishlist);
+      const {
+        data: { wishlist },
+      } = await axios.delete(`api/user/wishlist/${productId}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      setWishlist(wishlist);
     } catch (error) {
       console.log(error);
     }

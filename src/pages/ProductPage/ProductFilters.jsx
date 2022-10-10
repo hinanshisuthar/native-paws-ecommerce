@@ -19,8 +19,6 @@ const ProductFilters = () => {
   } = categories;
   const [showFilters, setShowFilters] = useState(false);
 
-  // const { filterState, filterDispatch} = useFilter();
-
   const showFiltersMenu = () => {
     setShowFilters(!showFilters);
   };

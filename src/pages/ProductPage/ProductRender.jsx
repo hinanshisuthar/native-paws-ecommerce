@@ -17,7 +17,7 @@ const ProductRender = () => {
     useWishlist();
   const { cart, addProductToCart } = useCart();
   const { search } = useProduct();
-  const { auth } = useAuth();
+  const { token } = useAuth();
 
   const navigate = useNavigate();
 
@@ -113,7 +113,7 @@ const ProductRender = () => {
                 <button
                   className="btn btn-primary"
                   onClick={() => {
-                    !auth.isLoggedIn
+                    token
                       ? addProductToCart(product)
                       : navigate("/login");
                   }}
@@ -134,7 +134,7 @@ const ProductRender = () => {
                   className="prod-like"
                   style={{ color: "#f34e4e" }}
                   onClick={() => {
-                    !auth.isLoggedIn
+                    token
                       ? addProductToWishlist(product)
                       : navigate("/login");
                   }}

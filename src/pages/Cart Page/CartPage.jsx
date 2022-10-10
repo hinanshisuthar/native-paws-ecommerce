@@ -26,8 +26,8 @@ const CartPage = () => {
               </Link>
             </div>
           ) : (
-            cart.map((product) => {
-              return <HorizontalCard product={product} id={product._id} />;
+            cart?.map((product) => {
+              return <HorizontalCard product={product} key={product._id} />;
             })
           )}
         </div>

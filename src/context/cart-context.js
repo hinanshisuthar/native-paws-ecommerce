@@ -5,38 +5,24 @@ import { useAuth } from "./auth-context";
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
-
   const [cart, setCart] = useState([]);
   const axios = require("axios").default;
-  const { auth } = useAuth();
-
-  useEffect(() => {
-    if (auth.isLoggedIn) {
-      (async () => {
-        const cartResponse = await axios.get("/api/user/cart", {
-          headers: {
-            authorization: auth.token,
-          },
-        });
-        setCart(cartResponse.data.cart);
-      })();
-    } else {
-      setCart([]);
-    }
-  }, [auth]);
+  const { token } = useAuth();
 
   const addProductToCart = async (product) => {
     try {
-      const addToCartResponse = await axios.post(
+      const {
+        data: { cart },
+      } = await axios.post(
         "/api/user/cart",
         { product },
         {
           headers: {
-            authorization: auth.token,
+            authorization: token,
           },
         }
       );
-      setCart(addToCartResponse.data.cart);
+      setCart(cart);
     } catch (error) {
       console.log(error);
     }
@@ -44,15 +30,14 @@ const CartProvider = ({ children }) => {
 
   const removeProductFromCart = async (productId) => {
     try {
-      const removeFromCartResponse = await axios.delete(
-        `/api/user/cart/${productId}`,
-        {
-          headers: {
-            authorization: auth.token,
-          },
-        }
-      );
-      setCart(removeFromCartResponse.data.cart);
+      const {
+        data: { cart },
+      } = await axios.delete(`/api/user/cart/${productId}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      setCart(cart);
     } catch (error) {
       console.log(error);
     }
@@ -60,20 +45,22 @@ const CartProvider = ({ children }) => {
 
   const updateProductQntyInCart = async (productId, updateType) => {
     try {
-      const updateCartQntyResponse = await axios.post(
-        `/api/user/cart/${productId}`,
+      const {
+        data: { cart },
+      } = await axios.post(
+        `api/user/cart/${productId}`,
         {
           action: {
-            type: updateType,
+            type: updateType === "increment" ? "increment" : "decrement",
           },
         },
         {
           headers: {
-            authorization: auth.token,
+            authorization: token,
           },
         }
       );
-      setCart(updateCartQntyResponse.data.cart);
+      setCart(cart);
     } catch (error) {
       console.log(error);
     }
@@ -86,7 +73,7 @@ const CartProvider = ({ children }) => {
         setCart,
         addProductToCart,
         removeProductFromCart,
-        updateProductQntyInCart
+        updateProductQntyInCart,
       }}
     >
       {children}

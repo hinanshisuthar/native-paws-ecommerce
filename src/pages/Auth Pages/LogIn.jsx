@@ -1,21 +1,28 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { PlaceLogin } from "../Cart Page/PlaceOrder";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./AuthPagesCss.css";
 import { loginHandler } from "../../backend/controllers/AuthController";
 import { useAuth } from "../../context/auth-context";
-import axios from "axios";
 
 const LogIn = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [showOfferTag, setShowOfferTag] = useState("none");
-
-  const { auth, setAuth } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
+  const { token, loginUser } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      loginUser(credentials.email, credentials.password);
+    })();
+  }, [credentials.email, credentials.password]);
+
+  if (token) {
+    setTimeout(() => {
+      navigate(location?.state?.from || "/products", { replace: true });
+    }, 500);
+  }
 
   const inputChangeHandler = (e) => {
     setCredentials({
@@ -24,47 +31,11 @@ const LogIn = () => {
     });
   };
 
-  const loginUser = async () => {
-    try {
-      const response = await axios.post("/api/auth/login", credentials);
-
-      localStorage.setItem("USER_TOKEN", response.data.encodedToken);
-      localStorage.setItem(
-        "USER_DATA",
-        JSON.stringify({
-          fullName: response.data.foundUser.fullName,
-          email: response.data.foundUser.email,
-        })
-      );
-      setAuth({
-        isLoggedIn: true,
-        token: response.data.encodedToken,
-        user: {
-          fullName: response.data.foundUser.fullName,
-          email: response.data.foundUser.email,
-        },
-      });
-      setShowOfferTag("flex");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const loginHandler = (e) => {
-    e.preventDefault();
-    setCredentials({
-      email: "",
-      password: "",
-    });
-    loginUser();
-  };
-
   const guestLoginHandler = () => {
     setCredentials({
       email: "testuser@gmail.com",
       password: "testuser*123",
     });
-    loginUser();
   };
 
   return (
@@ -121,31 +92,17 @@ const LogIn = () => {
                 value={credentials.password}
                 onChange={inputChangeHandler}
               />
-              <div className="flex-row-sb">
-                <input type="checkbox" name="tnc" id="tnc" />
-                <label htmlFor="tnc">
-                  <small>Remember Me</small>
-                </label>
-              </div>
-              <a className="link" href="#">
-                <h6 className="text-capitalize text-center">
-                  Forgot Password?
-                </h6>
-              </a>
-              <button className="sign-up-btn btn btn-primary" type="submit">
-                log in
-              </button>
             </form>
             <button
               className="sign-up-btn btn btn-secondary"
-              onClick={guestLoginHandler}
+              onClick={() => guestLoginHandler()}
             >
               Guest Login
             </button>
           </div>
         </div>
       </div>
-      {showOfferTag === "flex" ? <PlaceLogin /> : showOfferTag === "none"}
+      {/* {showOfferTag === "flex" ? <PlaceLogin /> : showOfferTag === "none"} */}
     </>
   );
 };

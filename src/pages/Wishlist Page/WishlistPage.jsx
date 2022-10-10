@@ -19,7 +19,7 @@ return (
             ) : (
             <div className="wish-prods grid grid-3-col grid-3-col-auto pt-md">
                 {wishlist.map((product) => {
-                    return <VertDismissCard product={product} id={product._id}/>
+                    return <VertDismissCard product={product} key={product._id} />
                 })}
             </div>
             )}

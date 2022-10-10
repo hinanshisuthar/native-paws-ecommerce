@@ -12,7 +12,7 @@ const HorizontalCard = ({ product }) => {
     addProductToWishlist,
     removeProductFromWishlist,
   } = useWishlist();
-  
+
   return (
     <div className="card-horizontal flex-row-sb" id={product._id}>
       <div className="product">
@@ -29,19 +29,19 @@ const HorizontalCard = ({ product }) => {
         </div>
         <div className="prod-quantity flex-row-sb pl-sm">
           <button
-            className="btn btn-float p-sm"
-            onClick={() => updateProductQntyInCart(product._id, "increment")}
-          >
-            <i className="fas fa-minus"></i>
-          </button>
-          <span className="p-sm">{product.quantity}</span>
-          <button
             className="btn btn-float"
             onClick={() =>
-              product.quantity > 1
+              product.qty > 1
                 ? updateProductQntyInCart(product._id, "decrement")
                 : null
             }
+          >
+            <i className="fas fa-minus"></i>
+          </button>
+          <span className="p-sm">{product.qty}</span>
+          <button
+            className="btn btn-float p-sm"
+            onClick={() => updateProductQntyInCart(product._id, "increment")}
           >
             <i className="fas fa-plus p-sm"></i>
           </button>
