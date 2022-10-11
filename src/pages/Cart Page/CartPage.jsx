@@ -4,9 +4,20 @@ import { useCart } from "../../context/cart-context";
 import "./cart.css";
 import { CartDetails } from "./CartDetails";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useAuth } from "../../context/auth-context";
 
 const CartPage = () => {
   const { cart } = useCart();
+  const { setLoader } = useAuth();
+
+  useEffect(() => {
+    setLoader(true);
+    setTimeout(() => {
+      setLoader(false);
+    }, 800);
+  }, []);
+
   return (
     <>
       <Navbar />

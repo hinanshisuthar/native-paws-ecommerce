@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { loginService } from "../services/loginService";
 import { signUpService } from "../services/signUpService";
 
@@ -9,6 +9,7 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorageToken?.token);
   const localStorageUser = JSON.parse(localStorage.getItem("user"));
   const [user, setUser] = useState(localStorageUser?.user);
+  const [loader, setLoader] = useState(false);
 
   const loginUser = async (email, password) => {
     if (email && password !== "") {
@@ -51,6 +52,13 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    setLoader(true);
+    setTimeout(() => {
+      setLoader(false);
+    }, 800);
+  }, [token]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -61,6 +69,8 @@ const AuthProvider = ({ children }) => {
         loginUser,
         createNewUser,
         setUser,
+        loader,
+        setLoader,
       }}
     >
       {children}

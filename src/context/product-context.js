@@ -1,6 +1,4 @@
-import { createContext, useContext, useReducer, useState } from "react";
-import { useEffect } from "react";
-import { reducerFunction } from "../utilities/reducerFunction";
+import { createContext, useContext, useState } from "react";
 
 const ProductContext = createContext();
 const useProduct = () => useContext(ProductContext);
@@ -11,7 +9,7 @@ const ProductProvider = ({ children }) => {
 
   return (
     <ProductContext.Provider
-      value={{search, setSearch, products, setProducts }}
+      value={{ search, setSearch, products, setProducts }}
     >
       {children}
     </ProductContext.Provider>
