@@ -32,18 +32,6 @@ const Navbar = () => {
     setSearch(e.target.value);
   };
 
-  const logoutHandler = () => {
-    localStorage.removeItem("login");
-    localStorage.removeItem("user");
-    localStorage.removeItem("signup");
-
-    setUser(null);
-    setToken("");
-    setTimeout(() => {
-      navigate("/");
-    }, 500);
-  };
-
   return (
     <>
       <header className="page-header flex-col-sb">
@@ -111,8 +99,8 @@ const Navbar = () => {
                   style={{ display: "block" }}
                 >
                   {token ? (
-                    <Link to="/log-out" className="p-1">
-                      <button onClick={logoutHandler}>Log out</button>
+                    <Link to="/user" className="p-1">
+                      <button>Profile</button>
                     </Link>
                   ) : (
                     <Link to="/login" className="p-1">
